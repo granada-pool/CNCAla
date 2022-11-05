@@ -68,7 +68,7 @@ export default function Home() {
 								size={isDesktop ? "lg" : "md"}
 								alignSelf="left"
 							>
-								CNCAla Donations
+								CNC Ala Donations
 							</Heading>
 							<Text
 								overflowWrap="break-word"
@@ -76,8 +76,8 @@ export default function Home() {
 								fontSize={isDesktop ? "md" : "14"}
 								pb="2"
 							>
-								This overview shows live data on the donations
-								for the CNCAla ISPO.
+								This overview shows live data of the CNC Ala
+								ISPO.
 							</Text>
 						</Stack>
 						<HStack pb={10} pl={isDesktop ? "0" : "10"}>
