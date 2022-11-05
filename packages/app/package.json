@@ -1,0 +1,37 @@
+{
+	"name": "@cncala/app",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@chakra-ui/icons": "^2.0.11",
+		"@chakra-ui/pro-theme": "^0.0.55",
+		"@chakra-ui/react": "^2.3.5",
+		"@emotion/react": "^11.10.4",
+		"@emotion/styled": "^11.10.4",
+		"@fontsource/inter": "^4.5.13",
+		"@fontsource/libre-franklin": "^4.5.10",
+		"@tanstack/react-query": "^4.10.3",
+		"@tanstack/react-query-devtools": "^4.10.4",
+		"framer-motion": "^7.5.3",
+		"next": "12.3.1",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"react-icons": "^4.6.0",
+		"react-intersection-observer": "^9.4.0",
+		"react-thermometer-component": "^1.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "18.8.3",
+		"@types/react": "18.0.21",
+		"@types/react-dom": "18.0.6",
+		"eslint": "8.25.0",
+		"eslint-config-next": "12.3.1",
+		"typescript": "4.8.4"
+	}
+}
