@@ -5,7 +5,7 @@ div#__next {
 }
 
 .thermometer .thermometer__mercury {
-	transition: all .5s ease-in-out; 
+	transition: all 3s ease-in-out; 
 }
   
 .thermometer .thermometer__percent-current:before, .thermometer .thermometer__percent-current:after, .thermometer .thermometer__draw-b:after, .thermometer .thermometer__draw-b:before {

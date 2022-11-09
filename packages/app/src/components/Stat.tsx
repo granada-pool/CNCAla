@@ -7,16 +7,20 @@ import {
 	useColorModeValue,
 } from "@chakra-ui/react";
 import * as React from "react";
+import CountUp from "react-countup";
 
 interface Props {
 	label: string;
-	value: string;
+	value: number;
+	currency?: string;
 }
 export const Stat = (props: Props) => {
-	const { label, value, ...boxProps } = props;
+	const { label, value, currency, ...boxProps } = props;
+
 	return (
 		<Box
-			px={{ base: "4", md: "6" }}
+			w={"56"}
+			px={{ base: "4", md: "4" }}
 			py={{ base: "5", md: "6" }}
 			bg="bg-surface"
 			borderRadius="lg"
@@ -28,7 +32,14 @@ export const Stat = (props: Props) => {
 					{label}
 				</Text>
 				<Heading size={useBreakpointValue({ base: "sm", md: "md" })}>
-					{value}
+					{`${currency ? currency : ""} `}
+					<CountUp
+						end={value}
+						formattingFn={(v) => {
+							return new Intl.NumberFormat("EN-US").format(v);
+						}}
+						redraw={false}
+					/>
 				</Heading>
 			</Stack>
 		</Box>

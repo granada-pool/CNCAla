@@ -9,7 +9,7 @@ export default function ContentCenter({ children, ...props }) {
 			minH="70vh"
 			{...props}
 		>
-			<Box w={useBreakpointValue({ base: "100%", md: "50%" })}>
+			<Box w={useBreakpointValue({ base: "100%", md: "80%" })}>
 				{children}
 			</Box>
 		</Container>

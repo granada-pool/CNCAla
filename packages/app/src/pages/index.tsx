@@ -4,6 +4,7 @@ import {
 	Center,
 	Heading,
 	HStack,
+	Icon,
 	Image,
 	SimpleGrid,
 	Stack,
@@ -16,38 +17,72 @@ import { AppContext } from "../context";
 import { Stat } from "../components/Stat";
 import { EaseInWithSlidingAnimation } from "../components/animations/EaseInWithSlidingAnimation";
 import Thermometer from "react-thermometer-component";
+import Wizard from "../components/wizard/Wizard";
+import { GiForest, GiFruitTree, GiPlantSeed } from "react-icons/gi";
+import { FaSeedling } from "react-icons/fa";
+import { RiPlantFill } from "react-icons/ri";
 
 export default function Home() {
 	const { isDesktop } = useContext(AppContext);
-	const [spoWalletdonations, setSpoWalletdonations] = useState(0);
+	const [walletdonations, setWalletdonations] = useState(0);
 	const goalADA = 750000;
+
+	const [donationsLeft, setDonationsLeft] = useState(goalADA);
 
 	const stats = [
 		{
 			label: "Donated",
-			value: `${new Intl.NumberFormat().format(spoWalletdonations)} ₳`,
+			value: walletdonations,
+			currency: "₳",
 		},
-		{ label: "Goal", value: `${new Intl.NumberFormat().format(750000)} ₳` },
+		{
+			label: "Goal",
+			value: 300000,
+			currency: "$",
+		},
 		{
 			label: "Planted Trees",
-			value: `${new Intl.NumberFormat().format(1000)} 🌳`,
+			value: 1000,
+			currency: "🌳",
 		},
-		{ label: "Stake Pools", value: "20" },
+		{ label: "Regenerated hectares", value: 3.6 },
+		{ label: "Lives changed", value: 50 /*currency: "👪🏿 🤝🏽"*/ },
+		{ label: "Stake Pools", value: 20 },
 	];
 
 	useEffect(() => {
-		fetch(
-			"http://postgrest-api.mainnet.dandelion.reservoir.network/spo_wallet_donations"
-		)
+		const baseURL =
+			"http://postgrest-api.mainnet.dandelion.reservoir.network";
+		const spoWalletUrl = `${baseURL}/spo_wallet_sum`;
+		const donationWalletUrl = `${baseURL}/donation_wallet_sum`;
+
+		fetch(spoWalletUrl, {
+			method: "GET",
+		})
 			.then((res) => res.json())
-			.then((data) => {
-				console.log(data);
-				setSpoWalletdonations(data[0].donations.toFixed(0));
+			.then((spoWalletData) => {
+				fetch(donationWalletUrl, {
+					method: "GET",
+				})
+					.then((res) => res.json())
+					.then((donationWalletData) => {
+						const totalDonations =
+							spoWalletData[0].donations.toFixed(0) +
+							donationWalletData[0].donations.toFixed(0);
+						setWalletdonations(totalDonations);
+					})
+					.catch((err) => {
+						console.log(err.message);
+					});
 			})
 			.catch((err) => {
 				console.log(err.message);
 			});
-	}, []);
+
+		setTimeout(() => {
+			setDonationsLeft(goalADA - 200000);
+		}, 10);
+	}, [donationsLeft]);
 	return (
 		<ContentCenter>
 			<Center>
@@ -83,43 +118,87 @@ export default function Home() {
 						<HStack pb={10} pl={isDesktop ? "0" : "10"}>
 							<Thermometer
 								theme="dark"
-								value={goalADA - spoWalletdonations}
+								value={
+									/*goalADA - walletdonations*/ donationsLeft
+								}
 								max={goalADA}
 								format=" ADA left"
 								size="large"
-								height="300"
+								height="450"
 							/>
 							<SimpleGrid
-								columns={{ base: 1, md: 2 }}
+								columns={{ base: 1, md: 3 }}
 								gap={{ base: "5", md: "6" }}
 							>
-								{stats.map(({ label, value }) => (
+								{stats.map(({ label, value, currency }) => (
 									<Stat
 										key={label}
 										label={label}
 										value={value}
+										currency={currency}
 									/>
 								))}
 							</SimpleGrid>
 						</HStack>
 					</EaseInWithSlidingAnimation>
-					<EaseInWithSlidingAnimation duration={0.8} delay={0.8}>
-						<HStack>
-							<Link
-								href="https://climateneutralcardano.org/donate/"
-								passHref
-							>
-								<Button
-									w="32"
-									bgColor="olivedrab"
-									borderRadius="20px"
-									_hover={{
-										bgColor: "green",
-									}}
-								>
-									Donate
-								</Button>
-							</Link>
+					<EaseInWithSlidingAnimation duration={0.8} delay={0.5}>
+						<Wizard
+							steps={[
+								{
+									title: "Milestone 1",
+									icon: (
+										<Icon
+											as={GiPlantSeed}
+											color="green"
+											boxSize="5"
+										/>
+									),
+								},
+								{
+									title: "Milestone 2",
+									icon: (
+										<Icon
+											as={RiPlantFill}
+											color="green"
+											boxSize="5"
+										/>
+									),
+								},
+								{
+									title: "Milestone 3",
+									icon: (
+										<Icon
+											as={FaSeedling}
+											color="green"
+											boxSize="5"
+										/>
+									),
+								},
+								{
+									title: "Milestone 4",
+									icon: (
+										<Icon
+											as={GiFruitTree}
+											color="green"
+											boxSize="5"
+										/>
+									),
+								},
+								{
+									title: "Milestone 5",
+									icon: (
+										<Icon
+											as={GiForest}
+											color="green"
+											boxSize="5"
+										/>
+									),
+								},
+							]}
+						/>
+					</EaseInWithSlidingAnimation>
+					<EaseInWithSlidingAnimation duration={0.8} delay={0.5}>
+						<HStack mt={8}>
 							<Link
 								href="https://climateneutralcardano.org/cnc-ala-ispo-eligible-pools/"
 								passHref
@@ -135,15 +214,30 @@ export default function Home() {
 									Stake with us
 								</Button>
 							</Link>
+							<Link
+								href="https://climateneutralcardano.org/donate/"
+								passHref
+							>
+								<Button
+									w="32"
+									bgColor="olivedrab"
+									borderRadius="20px"
+									_hover={{
+										bgColor: "green",
+									}}
+								>
+									Donate
+								</Button>
+							</Link>
 						</HStack>
 					</EaseInWithSlidingAnimation>
 					<EaseInWithSlidingAnimation
 						initY={20}
 						finalY={0}
 						duration={0.8}
-						delay={0.5}
+						delay={0.8}
 					>
-						<Stack align={"center"} spacing="0" pt="20">
+						<Stack align={"center"} spacing="0" pt="8">
 							<Image
 								src={"/assets/images/cnc_logo_dark.png"}
 								alt={"CNC"}
