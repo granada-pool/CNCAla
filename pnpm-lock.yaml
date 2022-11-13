@@ -20,9 +20,6 @@ importers:
       tsconfig-paths: 4.1.0
       typescript: 4.8.4
 
-  packages/addresses:
-    specifiers: {}
-
   packages/app:
     specifiers:
       '@chakra-ui/icons': ^2.0.11
@@ -42,6 +39,7 @@ importers:
       framer-motion: ^7.5.3
       next: 12.3.1
       react: 18.2.0
+      react-countup: ^6.3.2
       react-dom: 18.2.0
       react-icons: ^4.6.0
       react-intersection-observer: ^9.4.0
@@ -60,6 +58,7 @@ importers:
       framer-motion: 7.5.3_biqbaboplfbrettd7655fr4n2y
       next: 12.3.1_6tziyx3dehkoeijunclpkpolha
       react: 18.2.0
+      react-countup: 6.3.2_react@18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-icons: 4.6.0_react@18.2.0
       react-intersection-observer: 9.4.0_react@18.2.0
@@ -2322,6 +2321,10 @@ packages:
       yaml: 1.10.2
     dev: false
 
+  /countup.js/2.3.2:
+    resolution: {integrity: sha512-dQ7F/CmKGjaO6cDfhtEXwsKVlXIpJ89dFs8PvkaZH9jBVJ2Z8GU4iwG/qP7MgY8qwr+1skbwR6qecWWQLUzB8Q==}
+    dev: false
+
   /create-require/1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
     dev: true
@@ -3958,6 +3961,15 @@ packages:
       react: ^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.19.0
+      react: 18.2.0
+    dev: false
+
+  /react-countup/6.3.2_react@18.2.0:
+    resolution: {integrity: sha512-ID3344D1Yo0X5CWQiJYXBpiPCYLwMOw1VvNP9geJE+PqpdDmx6iuoMhxXAqjpdaRWiD6zUnLRK6rrnGgDg09pg==}
+    peerDependencies:
+      react: '>= 16.3.0'
+    dependencies:
+      countup.js: 2.3.2
       react: 18.2.0
     dev: false
 

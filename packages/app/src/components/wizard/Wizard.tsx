@@ -1,9 +1,10 @@
 import React from "react";
 
 import { Flex, Stack } from "@chakra-ui/react";
-import { useStep } from "@cncala/app/hooks/index";
+
 import { Step } from "./Step";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
+import { useStep } from "@momentum/app/hooks";
 
 interface StepData {
 	title: string;

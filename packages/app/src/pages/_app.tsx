@@ -18,10 +18,6 @@ export default function App({ Component, pageProps }: AppProps) {
 			</Head>
 			<Providers>
 				<Component {...pageProps} />
-				<script
-					type="text/javascript"
-					src="https://d22knjn4n6hjqd.cloudfront.net/thermometer/embed.js"
-				></script>
 			</Providers>
 		</>
 	);
