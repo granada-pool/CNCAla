@@ -1,2 +1,2 @@
-# momentum
-Fully confidential and decentralized messaging service for the masses
+# CNC Ala
+The world's first #ImpactStaking ISPO brought to you by Climate Neutral Cardano.
