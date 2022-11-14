@@ -52,7 +52,7 @@ export default function Home() {
 
 	useEffect(() => {
 		const baseURL =
-			"http://postgrest-api.mainnet.dandelion.reservoir.network";
+			"https://postgrest-api.mainnet.dandelion.reservoir.network";
 		const spoWalletUrl = `${baseURL}/spo_wallet_sum`;
 		const donationWalletUrl = `${baseURL}/donation_wallet_sum`;
 
