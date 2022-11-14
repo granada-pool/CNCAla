@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@momentum/app/*": ["./packages/app/src/*"]
+			"@cncala/app/*": ["./packages/app/src/*"]
 		},
 		"noEmit": true
 	},

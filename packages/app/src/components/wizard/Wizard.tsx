@@ -4,7 +4,7 @@ import { Flex, Stack } from "@chakra-ui/react";
 
 import { Step } from "./Step";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
-import { useStep } from "@momentum/app/hooks";
+import { useStep } from "@cncala/app/hooks";
 
 interface StepData {
 	title: string;

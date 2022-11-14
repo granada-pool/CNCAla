@@ -16,11 +16,11 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context";
 import { Stat } from "../components/Stat";
 import { EaseInWithSlidingAnimation } from "../components/animations/EaseInWithSlidingAnimation";
-import Thermometer from "react-thermometer-component";
 import Wizard from "../components/wizard/Wizard";
 import { GiForest, GiFruitTree, GiPlantSeed } from "react-icons/gi";
 import { FaSeedling } from "react-icons/fa";
 import { RiPlantFill } from "react-icons/ri";
+import Thermometer from "../components/thermometer";
 
 export default function Home() {
 	const { isDesktop } = useContext(AppContext);
