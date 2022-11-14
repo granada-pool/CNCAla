@@ -46,7 +46,7 @@ export default function Home() {
 			currency: "🌳",
 		},
 		{ label: "Regenerated hectares", value: 3.6 },
-		{ label: "Lives changed", value: 50 /*currency: "👪🏿 🤝🏽"*/ },
+		{ label: "Lives changed", value: 50 },
 		{ label: "Stake Pools", value: 20 },
 	];
 
@@ -67,9 +67,9 @@ export default function Home() {
 					.then((res) => res.json())
 					.then((donationWalletData) => {
 						const totalDonations =
-							spoWalletData[0].donations.toFixed(0) +
-							donationWalletData[0].donations.toFixed(0);
-						setWalletdonations(totalDonations);
+							spoWalletData[0].donations +
+							donationWalletData[0].donations;
+						setWalletdonations(totalDonations.toFixed(0));
 					})
 					.catch((err) => {
 						console.log(err.message);
