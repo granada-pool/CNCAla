@@ -7,7 +7,7 @@ import "@fontsource/libre-franklin";
 
 const overrides = {
 	config: {
-        initialColorMode: "light",
+        initialColorMode: "dark",
         useSystemColorMode: false,
     },
 	colors: {
