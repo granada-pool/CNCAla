@@ -42,11 +42,11 @@ export default function Home() {
 		},
 		{
 			label: "Planted Trees",
-			value: 1000,
+			value: 3636,
 			currency: "🌳",
 		},
 		{ label: "Regenerated hectares", value: 3.6 },
-		{ label: "Lives changed", value: 50 },
+		{ label: "Lives changed", value: 51 },
 		{ label: "Stake Pools", value: 20 },
 	];
 
