@@ -185,7 +185,7 @@ export default function Home() {
 									),
 								},
 								{
-									title: "CNFT Redemption",
+									title: "NFT Redemption",
 									icon: (
 										<Icon
 											as={GiForest}
