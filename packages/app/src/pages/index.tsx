@@ -25,7 +25,7 @@ import Thermometer from "../components/thermometer";
 export default function Home() {
 	const { isDesktop } = useContext(AppContext);
 	const [walletdonations, setWalletdonations] = useState(0);
-	const goalADA = 750000;
+	const goalADA = 100000;
 
 	const [donationsLeft, setDonationsLeft] = useState(goalADA);
 
@@ -36,9 +36,9 @@ export default function Home() {
 			currency: "₳",
 		},
 		{
-			label: "Goal",
-			value: 300000,
-			currency: "$",
+			label: "Initial Goal",
+			value: goalADA,
+			currency: "₳",
 		},
 		{
 			label: "Planted Trees",
@@ -80,7 +80,9 @@ export default function Home() {
 			});
 
 		setTimeout(() => {
-			setDonationsLeft(goalADA - 200000);
+			setDonationsLeft(
+				walletdonations < goalADA ? goalADA - walletdonations : 0
+			);
 		}, 10);
 	}, [donationsLeft]);
 	return (
@@ -118,9 +120,7 @@ export default function Home() {
 						<HStack pb={10} pl={isDesktop ? "0" : "10"}>
 							<Thermometer
 								theme="dark"
-								value={
-									/*goalADA - walletdonations*/ donationsLeft
-								}
+								value={donationsLeft}
 								max={goalADA}
 								format=" ADA left"
 								size="large"
@@ -145,7 +145,7 @@ export default function Home() {
 						<Wizard
 							steps={[
 								{
-									title: "Milestone 1",
+									title: "Project Start",
 									icon: (
 										<Icon
 											as={GiPlantSeed}
@@ -155,7 +155,7 @@ export default function Home() {
 									),
 								},
 								{
-									title: "Milestone 2",
+									title: "Start Donations",
 									icon: (
 										<Icon
 											as={RiPlantFill}
@@ -165,7 +165,7 @@ export default function Home() {
 									),
 								},
 								{
-									title: "Milestone 3",
+									title: "ISPO Launch",
 									icon: (
 										<Icon
 											as={FaSeedling}
@@ -175,7 +175,7 @@ export default function Home() {
 									),
 								},
 								{
-									title: "Milestone 4",
+									title: "ISPO End",
 									icon: (
 										<Icon
 											as={GiFruitTree}
@@ -185,7 +185,7 @@ export default function Home() {
 									),
 								},
 								{
-									title: "Milestone 5",
+									title: "CNFT Redemption",
 									icon: (
 										<Icon
 											as={GiForest}
