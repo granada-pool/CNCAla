@@ -84,7 +84,7 @@ export default function Home() {
 				walletdonations < goalADA ? goalADA - walletdonations : 0
 			);
 		}, 10);
-	}, [donationsLeft, walletdonations]);
+	}, [walletdonations]);
 	return (
 		<ContentCenter>
 			<Center>
@@ -120,9 +120,7 @@ export default function Home() {
 						<HStack pb={10} pl={isDesktop ? "0" : "10"}>
 							<Thermometer
 								theme="dark"
-								value={new Intl.NumberFormat("EN-US").format(
-									Math.round(donationsLeft)
-								)}
+								value={Math.round(donationsLeft)}
 								max={goalADA}
 								format=" ADA left"
 								size="large"
