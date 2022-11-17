@@ -33,7 +33,13 @@ export default function Wizard({
 
 	return (
 		<WizardContext.Provider value={actions}>
-			<Stack direction="column" w={"2xl"} h="100%" {...props}>
+			<Stack
+				direction="column"
+				w={{ base: "82", md: "2xl" }}
+				px={{ base: 20, md: 0 }}
+				h="100%"
+				{...props}
+			>
 				<Stack spacing="0" direction={{ base: "column", md: "row" }}>
 					{steps.map((step, id) => (
 						<Step

@@ -19,7 +19,7 @@ export const Stat = (props: Props) => {
 
 	return (
 		<Box
-			w={"56"}
+			w={{ base: "48", md: "52", lg: "56" }}
 			px={{ base: "4", md: "4" }}
 			py={{ base: "5", md: "6" }}
 			bg="bg-surface"

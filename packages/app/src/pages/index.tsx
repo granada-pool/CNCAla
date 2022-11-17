@@ -69,7 +69,7 @@ export default function Home() {
 						const totalDonations =
 							spoWalletData[0].donations +
 							donationWalletData[0].donations;
-						setWalletdonations(totalDonations.toFixed(0));
+						setWalletdonations(totalDonations);
 					})
 					.catch((err) => {
 						console.log(err.message);
@@ -84,7 +84,7 @@ export default function Home() {
 				walletdonations < goalADA ? goalADA - walletdonations : 0
 			);
 		}, 10);
-	}, [donationsLeft]);
+	}, [donationsLeft, walletdonations]);
 	return (
 		<ContentCenter>
 			<Center>
@@ -120,14 +120,16 @@ export default function Home() {
 						<HStack pb={10} pl={isDesktop ? "0" : "10"}>
 							<Thermometer
 								theme="dark"
-								value={donationsLeft}
+								value={new Intl.NumberFormat("EN-US").format(
+									Math.round(donationsLeft)
+								)}
 								max={goalADA}
 								format=" ADA left"
 								size="large"
 								height="450"
 							/>
 							<SimpleGrid
-								columns={{ base: 1, md: 3 }}
+								columns={{ base: 1, md: 2, lg: 3 }}
 								gap={{ base: "5", md: "6" }}
 							>
 								{stats.map(({ label, value, currency }) => (
