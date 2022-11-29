@@ -33,21 +33,29 @@ export default function Home() {
 		{
 			label: "Donated",
 			value: walletdonations,
+			description: "Test Description",
 			currency: "₳",
 		},
 		{
 			label: "Initial Goal",
 			value: goalADA,
+			description: "Test Description",
 			currency: "₳",
 		},
 		{
-			label: "Planted Trees",
-			value: 3636,
-			currency: "🌳",
+			label: "Planted Seeds",
+			value: 4296,
+			description: "Test Description",
+			currency: "🌱",
 		},
-		{ label: "Regenerated hectares", value: 3.6 },
-		{ label: "Lives changed", value: 51 },
-		{ label: "Stake Pools", value: 20 },
+		{
+			label: "Regenerated hectares",
+			value: 3.6,
+			description: "Test Description",
+			decimals: 1,
+		},
+		{ label: "Worked Hours", value: 3680, description: "Test Description" },
+		{ label: "Stake Pools", value: 25, description: "Test Description" },
 	];
 
 	useEffect(() => {
@@ -130,14 +138,24 @@ export default function Home() {
 								columns={{ base: 1, md: 2, lg: 3 }}
 								gap={{ base: "5", md: "6" }}
 							>
-								{stats.map(({ label, value, currency }) => (
-									<Stat
-										key={label}
-										label={label}
-										value={value}
-										currency={currency}
-									/>
-								))}
+								{stats.map(
+									({
+										label,
+										value,
+										description,
+										currency,
+										decimals,
+									}) => (
+										<Stat
+											key={label}
+											label={label}
+											value={value}
+											description={description}
+											decimals={decimals}
+											currency={currency}
+										/>
+									)
+								)}
 							</SimpleGrid>
 						</HStack>
 					</EaseInWithSlidingAnimation>
@@ -237,14 +255,64 @@ export default function Home() {
 						duration={0.8}
 						delay={0.8}
 					>
-						<Stack align={"center"} spacing="0" pt="8">
-							<Image
-								src={"/assets/images/cnc_logo_dark.png"}
-								alt={"CNC"}
-								loading="lazy"
-								objectFit="contain"
-								w={isDesktop ? "sm" : "xs"}
-							/>
+						<Stack align={"center"} spacing="6" pt="8">
+							<Stack
+								spacing="4"
+								direction={isDesktop ? "row" : "column"}
+								align={"center"}
+							>
+								<Image
+									src={"/assets/images/Proxies_logo.png"}
+									alt={"CNC"}
+									loading="lazy"
+									objectFit="contain"
+									w={"32"}
+								/>
+								<Image
+									src={
+										"/assets/images/YummiUniverse_logo.png"
+									}
+									alt={"CNC"}
+									loading="lazy"
+									objectFit="contain"
+									w={"20"}
+								/>
+								<Image
+									src={"/assets/images/NEWM_logo.png"}
+									alt={"CNC"}
+									loading="lazy"
+									objectFit="contain"
+									w={"16"}
+								/>
+								<Image
+									src={"/assets/images/cnc_logo_dark.png"}
+									alt={"CNC"}
+									loading="lazy"
+									objectFit="contain"
+									w={"52"}
+								/>
+								<Image
+									src={"/assets/images/Madalemurs_logo.png"}
+									alt={"CNC"}
+									loading="lazy"
+									objectFit="contain"
+									w={"16"}
+								/>
+								<Image
+									src={"/assets/images/EarthNative_logo.png"}
+									alt={"CNC"}
+									loading="lazy"
+									objectFit="contain"
+									w={"20"}
+								/>
+								<Image
+									src={"/assets/images/DripDropz_logo.png"}
+									alt={"CNC"}
+									loading="lazy"
+									objectFit="contain"
+									w={"32"}
+								/>
+							</Stack>
 							<SocialMedia />
 						</Stack>
 					</EaseInWithSlidingAnimation>
