@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Image, SimpleGrid } from "@chakra-ui/react";
+import { Center, Image, SimpleGrid } from "@chakra-ui/react";
 
 export default function MobileLogos() {
 	return (
@@ -15,7 +15,7 @@ export default function MobileLogos() {
 				columns={{ base: 1, md: 3 }}
 				gap={{ base: "5", md: "6" }}
 			>
-				<Box align="center">
+				<Center>
 					<Image
 						src={"/assets/images/YummiUniverse_logo.png"}
 						alt={"CNC"}
@@ -23,8 +23,8 @@ export default function MobileLogos() {
 						objectFit="contain"
 						w={"20"}
 					/>
-				</Box>
-				<Box align="center">
+				</Center>
+				<Center>
 					<Image
 						src={"/assets/images/Proxies_logo.png"}
 						alt={"CNC"}
@@ -32,8 +32,8 @@ export default function MobileLogos() {
 						objectFit="contain"
 						w={"36"}
 					/>
-				</Box>
-				<Box align="center">
+				</Center>
+				<Center>
 					<Image
 						src={"/assets/images/EarthNative_logo.png"}
 						alt={"CNC"}
@@ -41,8 +41,8 @@ export default function MobileLogos() {
 						objectFit="contain"
 						w={"20"}
 					/>
-				</Box>
-				<Box align="center">
+				</Center>
+				<Center>
 					<Image
 						src={"/assets/images/NEWM_logo.png"}
 						alt={"CNC"}
@@ -50,8 +50,8 @@ export default function MobileLogos() {
 						objectFit="contain"
 						w={"16"}
 					/>
-				</Box>
-				<Box align="center">
+				</Center>
+				<Center>
 					<Image
 						src={"/assets/images/DripDropz_logo.png"}
 						alt={"CNC"}
@@ -60,8 +60,8 @@ export default function MobileLogos() {
 						w={"36"}
 						pt={"4"}
 					/>
-				</Box>
-				<Box align="center">
+				</Center>
+				<Center>
 					<Image
 						src={"/assets/images/Madalemurs_logo.png"}
 						alt={"CNC"}
@@ -69,7 +69,7 @@ export default function MobileLogos() {
 						objectFit="contain"
 						w={"16"}
 					/>
-				</Box>
+				</Center>
 			</SimpleGrid>
 		</>
 	);
