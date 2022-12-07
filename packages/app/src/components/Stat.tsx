@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import * as React from "react";
 import CountUp from "react-countup";
+import { AppContext } from "../context";
 import ModalWindow from "./ModalWindow";
 
 interface Props {
@@ -25,6 +26,8 @@ export const Stat = (props: Props) => {
 	const { label, dual, value, description, currency, decimals, ...boxProps } =
 		props;
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	const { isDesktop } = React.useContext(AppContext);
+
 	return (
 		<>
 			<Box
@@ -55,11 +58,7 @@ export const Stat = (props: Props) => {
 								<Text fontSize="sm" color="muted">
 									{dual[0].label}
 								</Text>
-								<Heading
-									size={useBreakpointValue({
-										base: "xs",
-									})}
-								>
+								<Heading size={isDesktop ? "xs" : "2xs"}>
 									<CountUp
 										end={dual[0].value}
 										formattingFn={(v) => {
@@ -77,11 +76,7 @@ export const Stat = (props: Props) => {
 								<Text fontSize="sm" color="muted">
 									{dual[1].label}
 								</Text>
-								<Heading
-									size={useBreakpointValue({
-										base: "xs",
-									})}
-								>
+								<Heading size={isDesktop ? "xs" : "2xs"}>
 									<CountUp
 										end={dual[1].value}
 										formattingFn={(v) => {
@@ -96,9 +91,7 @@ export const Stat = (props: Props) => {
 							</Stack>
 						</HStack>
 					) : (
-						<Heading
-							size={useBreakpointValue({ base: "sm", md: "md" })}
-						>
+						<Heading size={isDesktop ? "md" : "sm"}>
 							{`${currency ? currency : ""} `}
 							<CountUp
 								end={value}
