@@ -35,10 +35,11 @@ class Thermometer extends Component {
       value: this.props.value || 0, //default 0
       max: this.props.max || 100, //default 100
       steps: this.props.steps,
+      label: this.props.label,
       format: this.props.format || '',
       size: () => this.props.size === 'small' || this.props.size === 'normal' || this.props.size === 'large' ? this.props.size : 'normal',
       height: this.props.height || 200, //default 200
-      valstr: () => new Intl.NumberFormat("EN-US").format(this.options.value) + this.options.format,
+      valstr: () => this.options.label,
       percent: () => this.options.value / this.options.max * 100,
       intervals: []
     }

@@ -18,6 +18,7 @@ import Wizard from "../components/wizard/Wizard";
 import { GiForest, GiFruitTree, GiPlantSeed } from "react-icons/gi";
 import { FaSeedling } from "react-icons/fa";
 import { RiPlantFill } from "react-icons/ri";
+import { MdOutlineInfo } from "react-icons/md";
 import Thermometer from "../components/thermometer";
 import DesktopLogos from "../components/shell/DesktopLogos";
 import MobileLogos from "../components/shell/MobileLogos";
@@ -25,8 +26,8 @@ import MobileLogos from "../components/shell/MobileLogos";
 export default function Home() {
 	const { isDesktop } = useContext(AppContext);
 	const [walletdonations, setWalletdonations] = useState(0);
-	const goalADA = 100000;
 
+	const goalADA = 100000;
 	const [donationsLeft, setDonationsLeft] = useState(goalADA);
 
 	const stats = [
@@ -38,11 +39,13 @@ export default function Home() {
 			currency: "₳",
 		},
 		{
-			label: "Planted Seeds",
-			value: 5544,
+			label: "Trees Planted",
+			dual: [
+				{ label: "In Pot", value: 3101 },
+				{ label: "In Ground", value: 2443 },
+			],
 			description:
-				"In Pot- total seeds or seedlings planted either in germinator or pot, plus the total in Ground- seedlings or young trees planted in the ground at site.",
-			currency: "🌱",
+				"In Pot- total seeds or seedlings planted either in germinator or pot, and the total in Ground- seedlings or young trees planted in the ground at site.",
 		},
 		{
 			label: "Initial Goal",
@@ -51,7 +54,7 @@ export default function Home() {
 			currency: "₳",
 		},
 		{
-			label: "Regenerated hectares",
+			label: "Regenerated Hectares",
 			value: 3.6,
 			description:
 				"Total hectares regenerated between three sites, starting with Ranomafana site.",
@@ -123,18 +126,29 @@ export default function Home() {
 					>
 						<Stack align="center">
 							<Heading size={isDesktop ? "lg" : "md"}>
-								CNC Ala Donations
+								CNC Ala Dashboard
 							</Heading>
-							<Text
-								overflowWrap="break-word"
-								w={isDesktop ? "xl" : "100%"}
-								fontSize={isDesktop ? "md" : "14"}
-								pb="2"
-								align="center"
-							>
-								This overview shows live data of the CNC Ala
-								ISPO.
-							</Text>
+							<Stack spacing="0">
+								<Text
+									overflowWrap="break-word"
+									w={isDesktop ? "xl" : "100%"}
+									fontSize={isDesktop ? "md" : "14"}
+									align="center"
+								>
+									{`The world's first RealFi ISPO is growing
+								strong.`}
+								</Text>
+								<Text
+									overflowWrap="break-word"
+									w={isDesktop ? "xl" : "100%"}
+									fontSize={isDesktop ? "md" : "14"}
+									pb="2"
+									align="center"
+								>
+									{`Join us and become an #ImpactStaking
+								pioneer!`}
+								</Text>
+							</Stack>
 						</Stack>
 						<HStack mt={8}>
 							<Link
@@ -181,39 +195,52 @@ export default function Home() {
 							</Link>
 						</HStack>
 					</Stack>
-					<HStack pb={10} pl={isDesktop ? "0" : "10"}>
-						<Thermometer
-							theme="dark"
-							value={Math.round(donationsLeft)}
-							max={goalADA}
-							format=" ADA left"
-							size="large"
-							height="450"
-						/>
-						<SimpleGrid
-							columns={{ base: 1, md: 2 }}
-							gap={{ base: "5", md: "6" }}
-						>
-							{stats.map(
-								({
-									label,
-									value,
-									description,
-									currency,
-									decimals,
-								}) => (
-									<Stat
-										key={label}
-										label={label}
-										value={value}
-										description={description}
-										decimals={decimals}
-										currency={currency}
-									/>
-								)
-							)}
-						</SimpleGrid>
-					</HStack>
+					<Stack align="center" spacing="0">
+						<HStack pb={10} pl={isDesktop ? "0" : "10"}>
+							<Thermometer
+								theme="dark"
+								value={Math.round(walletdonations)}
+								max={goalADA}
+								label={`${new Intl.NumberFormat("EN-US").format(
+									Math.round(donationsLeft)
+								)} ADA left`}
+								size="large"
+								height="450"
+							/>
+							<SimpleGrid
+								columns={{ base: 1, md: 2 }}
+								gap={{ base: "5", md: "6" }}
+							>
+								{stats.map(
+									({
+										label,
+										value,
+										dual,
+										description,
+										currency,
+										decimals,
+									}) => (
+										<Stat
+											key={label}
+											label={label}
+											value={value}
+											dual={dual}
+											description={description}
+											decimals={decimals}
+											currency={currency}
+										/>
+									)
+								)}
+							</SimpleGrid>
+						</HStack>
+						<HStack align={"center"} pb={6}>
+							<Icon as={MdOutlineInfo} boxSize="6" />
+							<Text>
+								Click on the stats to read more about each
+								category.
+							</Text>
+						</HStack>
+					</Stack>
 				</EaseInWithSlidingAnimation>
 				<EaseInWithSlidingAnimation duration={0.8} delay={0.5}>
 					<Wizard
