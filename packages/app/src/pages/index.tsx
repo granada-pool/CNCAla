@@ -235,7 +235,7 @@ export default function Home() {
 						</HStack>
 						<HStack align={"center"} pb={6}>
 							<Icon as={MdOutlineInfo} boxSize="6" />
-							<Text>
+							<Text fontSize={isDesktop ? "md" : "sm"}>
 								Click on the stats to read more about each
 								category.
 							</Text>

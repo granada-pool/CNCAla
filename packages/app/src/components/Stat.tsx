@@ -47,7 +47,7 @@ export const Stat = (props: Props) => {
 				onClick={onOpen}
 				{...boxProps}
 			>
-				<Stack>
+				<Stack spacing={isDesktop ? "2" : "-0.5"}>
 					<Text fontSize="sm" color="muted">
 						{label}
 					</Text>
@@ -55,10 +55,13 @@ export const Stat = (props: Props) => {
 					{dual ? (
 						<HStack>
 							<Stack w={"50%"} spacing="-1">
-								<Text fontSize="sm" color="muted">
+								<Text
+									fontSize={isDesktop ? "sm" : "xs"}
+									color="muted"
+								>
 									{dual[0].label}
 								</Text>
-								<Heading size={isDesktop ? "xs" : "2xs"}>
+								<Heading size={"xs"}>
 									<CountUp
 										end={dual[0].value}
 										formattingFn={(v) => {
@@ -71,12 +74,19 @@ export const Stat = (props: Props) => {
 									/>
 								</Heading>
 							</Stack>
-							<Divider h="12" orientation="vertical" px="auto" />
+							<Divider
+								h={isDesktop ? "12" : "10"}
+								orientation="vertical"
+								px="auto"
+							/>
 							<Stack w={"50%"} spacing="-1">
-								<Text fontSize="sm" color="muted">
+								<Text
+									fontSize={isDesktop ? "sm" : "xs"}
+									color="muted"
+								>
 									{dual[1].label}
 								</Text>
-								<Heading size={isDesktop ? "xs" : "2xs"}>
+								<Heading size={"xs"}>
 									<CountUp
 										end={dual[1].value}
 										formattingFn={(v) => {
