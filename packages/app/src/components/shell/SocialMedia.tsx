@@ -11,7 +11,7 @@ const socials = [
 	{
 		label: "Twitter",
 		icon: <FaTwitter fontSize="1.25rem" />,
-		href: "https://twitter.com/CardanoCnbg",
+		href: "https://twitter.com/CNCardano",
 	},
 	{
 		label: "FaTelegramPlane",
