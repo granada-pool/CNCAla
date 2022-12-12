@@ -24,13 +24,21 @@ interface ModelWindowProps {
 	buttonLabel?: string;
 	buttonLink?: string;
 	backgroundColor?: string;
-	brandColor?: string;
+	shadowColor?: string;
 	isOpen: boolean;
 	onClose: () => void;
 }
 
 export default function ModalWindow(props: ModelWindowProps) {
-	const { title, header, subtitle, backgroundColor, isOpen, onClose } = props;
+	const {
+		title,
+		header,
+		subtitle,
+		backgroundColor,
+		shadowColor,
+		isOpen,
+		onClose,
+	} = props;
 	const fallbackBackgroundColor = useColorModeValue("gray.50", "gray.800");
 	const { isDesktop } = useContext(AppContext);
 
@@ -47,12 +55,14 @@ export default function ModalWindow(props: ModelWindowProps) {
 				bgColor={
 					backgroundColor ? backgroundColor : fallbackBackgroundColor
 				}
-				boxShadow={"0 0 7px 1px #48BB78"}
+				boxShadow={`0 0 7px 1px ${
+					shadowColor ? shadowColor : "#48BB78"
+				}`}
 				minH={{ base: "xs", lg: "sm" }}
 				minW={{ base: "xs" }}
 				rounded="xl"
 			>
-				<ModalHeader>{title} </ModalHeader>
+				<ModalHeader>{title}</ModalHeader>
 				<ModalCloseButton _focus={{ boxShadow: "none" }} />
 				<ModalBody mt={{ base: 0, lg: 8 }}>
 					<Stack align="center" spacing={6}>

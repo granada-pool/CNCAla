@@ -129,6 +129,7 @@ export const Stat = (props: Props) => {
 			<ModalWindow
 				header={label}
 				subtitle={description}
+				shadowColor={labelColor}
 				isOpen={isOpen}
 				onClose={onClose}
 			/>
