@@ -19,6 +19,7 @@ export default function AppProvider({ children }) {
 
 	const [ctx, setCtx] = useState<IAppContext>({
 		isDesktop: false,
+		isTablet: false,
 		isConnected: false,
 		async error(err: Error | string, title?: string): Promise<string> {
 			console.error(err instanceof Error ? err : new Error(err));
@@ -43,13 +44,22 @@ export default function AppProvider({ children }) {
 
 	const isDesktop = useBreakpointValue({ base: false, lg: true });
 
+	const isTablet = useBreakpointValue({ base: false, md: true, lg: false });
+
 	useEffect(() => {
-		if (isDesktop != ctx.isDesktop)
+		if (isDesktop != ctx.isDesktop) {
 			setCtx({
 				...ctx,
 				isDesktop: isDesktop,
 			});
-	}, [isDesktop]);
+		}
+		if (isTablet != ctx.isTablet) {
+			setCtx({
+				...ctx,
+				isTablet: isTablet,
+			});
+		}
+	}, [isDesktop, isTablet]);
 
 	// TODO: Add error boundary
 

@@ -5,17 +5,18 @@ import {
 	HStack,
 	Stack,
 	Text,
-	useBreakpointValue,
 	useColorModeValue,
 	useDisclosure,
 } from "@chakra-ui/react";
 import * as React from "react";
+import { useContext } from "react";
 import CountUp from "react-countup";
 import { AppContext } from "../context";
 import ModalWindow from "./ModalWindow";
 
 interface Props {
 	label: string;
+	labelColor: string;
 	value?: number;
 	description: string;
 	dual?: { label: string; value: number }[];
@@ -23,10 +24,18 @@ interface Props {
 	decimals?: number;
 }
 export const Stat = (props: Props) => {
-	const { label, dual, value, description, currency, decimals, ...boxProps } =
-		props;
+	const {
+		label,
+		labelColor,
+		value,
+		description,
+		currency,
+		dual,
+		decimals,
+		...boxProps
+	} = props;
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const { isDesktop } = React.useContext(AppContext);
+	const { isDesktop } = useContext(AppContext);
 
 	return (
 		<>
@@ -42,13 +51,13 @@ export const Stat = (props: Props) => {
 
 					transform: "scale(1.05)",
 					transition: "0.2s",
-					boxShadow: "0px 0px 10px #48BB78",
+					boxShadow: `0px 0px 10px ${labelColor}`,
 				}}
 				onClick={onOpen}
 				{...boxProps}
 			>
 				<Stack spacing={isDesktop ? "2" : "-0.5"}>
-					<Text fontSize="sm" color="muted">
+					<Text fontSize="sm" color={labelColor}>
 						{label}
 					</Text>
 

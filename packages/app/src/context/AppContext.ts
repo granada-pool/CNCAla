@@ -9,6 +9,7 @@ export interface IUserMetadata {
 
 export interface IAppContext {
 	isDesktop: boolean;
+	isTablet: boolean;
 	isConnected: boolean;
 	user?: IUserMetadata,
 	error: (err: Error | string | unknown, title?: string) => void;
@@ -17,6 +18,7 @@ export interface IAppContext {
 
 export const AppContext = React.createContext<IAppContext>({
 	isDesktop: false,
+	isTablet: false,
 	isConnected: false,
 	user: null,
 	error: null,

@@ -22,57 +22,16 @@ import { MdOutlineInfo } from "react-icons/md";
 import Thermometer from "../components/thermometer";
 import DesktopLogos from "../components/shell/DesktopLogos";
 import MobileLogos from "../components/shell/MobileLogos";
+import { getStats } from "../components/data/_data";
 
 export default function Home() {
-	const { isDesktop } = useContext(AppContext);
+	const { isDesktop, isTablet } = useContext(AppContext);
 	const [walletdonations, setWalletdonations] = useState(0);
 
 	const goalADA = 100000;
 	const [donationsLeft, setDonationsLeft] = useState(goalADA);
 
-	const stats = [
-		{
-			label: "Donated",
-			value: walletdonations,
-			description:
-				"Total ADA donated either by pools or direct donation. This data is directly fetched from the Cardano blockchain.",
-			currency: "₳",
-		},
-		{
-			label: "Trees Planted",
-			dual: [
-				{ label: "In Pot", value: 3101 },
-				{ label: "In Ground", value: 2443 },
-			],
-			description:
-				"In Pot- total seeds or seedlings planted either in germinator or pot, and the total in Ground- seedlings or young trees planted in the ground at site.",
-		},
-		{
-			label: "Initial Goal",
-			value: goalADA,
-			description: "Goal for phase one, Ranomafana site, 3.6 hectares.",
-			currency: "₳",
-		},
-		{
-			label: "Regenerated Hectares",
-			value: 3.6,
-			description:
-				"Total hectares regenerated between three sites, starting with Ranomafana site.",
-			decimals: 1,
-		},
-		{
-			label: "Stake Pools",
-			value: 25,
-			description:
-				"Number of official CNC Ala ISPO pools. These SPOs are donating 85 ADA from the first block minted every epoch (fixed fee).",
-		},
-		{
-			label: "Hours Worked",
-			value: 7632,
-			description:
-				"Total number of hours worked and paid for by the project.",
-		},
-	];
+	const stats = getStats(walletdonations, goalADA, isTablet);
 
 	useEffect(() => {
 		const baseURL =
@@ -208,12 +167,13 @@ export default function Home() {
 								height="450"
 							/>
 							<SimpleGrid
-								columns={{ base: 1, md: 2 }}
+								columns={{ base: 1, md: 2, lg: 3 }}
 								gap={{ base: "5", md: "6" }}
 							>
 								{stats.map(
 									({
 										label,
+										labelColor,
 										value,
 										dual,
 										description,
@@ -223,6 +183,7 @@ export default function Home() {
 										<Stat
 											key={label}
 											label={label}
+											labelColor={labelColor}
 											value={value}
 											dual={dual}
 											description={description}

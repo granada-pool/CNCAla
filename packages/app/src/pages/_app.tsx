@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
 		<>
 			<Head>
 				<link rel="shortcut icon" href="/favicon.ico" />
-				<title>CNC Ala Donations</title>
+				<title>CNC Ala Dashboard</title>
 				<meta
 					name="viewport"
 					content="initial-scale=1, width=device-width"
