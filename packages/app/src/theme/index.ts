@@ -31,5 +31,4 @@ const overrides = {
 	...foundations,
 };
 
-
 export const theme: any = extendTheme(overrides, proTheme);
