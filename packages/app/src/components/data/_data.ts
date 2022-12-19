@@ -6,7 +6,7 @@ const getStats = (walletdonations, goalADA, isTablet) => {
             label: "Trees Planted",
             labelColor: "lightgreen",
             dual: [
-                { label: "In Pot", value: 3101 },
+                { label: "In Pot", value: 3744 },
                 { label: "In Ground", value: 2443 },
             ],
             description:
@@ -23,7 +23,7 @@ const getStats = (walletdonations, goalADA, isTablet) => {
         {
             label: "Hours Worked",
             labelColor: "lightgreen",
-            value: 7632,
+            value: 8928,
             description:
                 "Total number of hours worked and paid for by the project.",
         },
