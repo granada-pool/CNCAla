@@ -22,7 +22,7 @@ import { MdOutlineInfo } from "react-icons/md";
 import Thermometer from "../components/thermometer";
 import DesktopLogos from "../components/shell/DesktopLogos";
 import MobileLogos from "../components/shell/MobileLogos";
-import { getStats } from "../components/data/_data";
+import { getStats, Stats } from "../components/data/_data";
 
 export default function Home() {
 	const { isDesktop, isTablet } = useContext(AppContext);
@@ -179,7 +179,7 @@ export default function Home() {
 										description,
 										currency,
 										decimals,
-									}) => (
+									}: Stats) => (
 										<Stat
 											key={label}
 											label={label}
