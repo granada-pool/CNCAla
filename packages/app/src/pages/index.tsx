@@ -259,12 +259,7 @@ export default function Home() {
 						]}
 					/>
 				</EaseInWithSlidingAnimation>
-				<EaseInWithSlidingAnimation
-					initY={20}
-					finalY={0}
-					duration={0.8}
-					delay={0.8}
-				>
+				<EaseInWithSlidingAnimation>
 					<Stack align={"center"} spacing="6" pt="8">
 						<Stack
 							spacing="4"
