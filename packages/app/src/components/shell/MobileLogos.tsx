@@ -1,5 +1,5 @@
 import React from "react";
-import { Center, Image, Link, SimpleGrid } from "@chakra-ui/react";
+import { Box, Center, Image, Link, SimpleGrid } from "@chakra-ui/react";
 
 export default function MobileLogos() {
 	return (
@@ -84,6 +84,19 @@ export default function MobileLogos() {
 						/>
 					</Link>
 				</Center>
+				<Box></Box>
+				<Center>
+					<Link href="https://ada-anvil.io/">
+						<Image
+							src={"/assets/images/anvil_logo.png"}
+							alt={"Anvil"}
+							loading="lazy"
+							objectFit="contain"
+							w={"16"}
+						/>
+					</Link>
+				</Center>
+				<Box></Box>
 			</SimpleGrid>
 		</>
 	);

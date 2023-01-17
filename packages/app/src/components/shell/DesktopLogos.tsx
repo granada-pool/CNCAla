@@ -37,7 +37,7 @@ export default function DesktopLogos() {
 					</Link>
 				</Center>
 				<Center>
-					<Link href="https://newm.io/">
+					<Link href="https://ada-anvil.io/">
 						<Image
 							src={"/assets/images/anvil_logo.png"}
 							alt={"Anvil"}
