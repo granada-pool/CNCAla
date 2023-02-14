@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 
 import {
+	Button,
 	Heading,
+	HStack,
 	Modal,
 	ModalBody,
 	ModalCloseButton,
@@ -15,6 +17,8 @@ import {
 } from "@chakra-ui/react";
 import { AppContext } from "../context";
 import { SocialMedia } from "./shell/SocialMedia";
+import Logo from "./Logo";
+import Link from "next/link";
 
 interface ModelWindowProps {
 	title?: string;
@@ -34,6 +38,8 @@ export default function ModalWindow(props: ModelWindowProps) {
 		title,
 		header,
 		subtitle,
+		buttonLabel,
+		buttonLink,
 		backgroundColor,
 		shadowColor,
 		isOpen,
@@ -62,7 +68,12 @@ export default function ModalWindow(props: ModelWindowProps) {
 				minW={{ base: "xs" }}
 				rounded="xl"
 			>
-				<ModalHeader>{title}</ModalHeader>
+				<ModalHeader>
+					<HStack>
+						<Logo size={32} />
+						{title}
+					</HStack>
+				</ModalHeader>
 				<ModalCloseButton _focus={{ boxShadow: "none" }} />
 				<ModalBody mt={{ base: 0, lg: 8 }}>
 					<Stack align="center" spacing={6}>
@@ -75,6 +86,13 @@ export default function ModalWindow(props: ModelWindowProps) {
 							{header}
 						</Heading>
 						<Text textAlign="center">{subtitle}</Text>
+						{buttonLabel && buttonLink ? (
+							<Link href={buttonLink}>
+								<Button>{buttonLabel}</Button>
+							</Link>
+						) : (
+							<></>
+						)}
 					</Stack>
 				</ModalBody>
 				<ModalFooter textAlign={"center"} alignSelf="center">

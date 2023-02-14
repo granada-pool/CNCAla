@@ -166,40 +166,42 @@ export default function Home() {
 								size="large"
 								height="450"
 							/>
-							<SimpleGrid
-								columns={{ base: 1, md: 2, lg: 3 }}
-								gap={{ base: "5", md: "6" }}
-							>
-								{stats.map(
-									({
-										label,
-										labelColor,
-										value,
-										dual,
-										description,
-										currency,
-										decimals,
-									}: Stats) => (
-										<Stat
-											key={label}
-											label={label}
-											labelColor={labelColor}
-											value={value}
-											dual={dual}
-											description={description}
-											decimals={decimals}
-											currency={currency}
-										/>
-									)
-								)}
-							</SimpleGrid>
-						</HStack>
-						<HStack align={"center"} pb={6}>
-							<Icon as={MdOutlineInfo} boxSize="6" />
-							<Text fontSize={isDesktop ? "md" : "sm"}>
-								Click on the stats to read more about each
-								category.
-							</Text>
+							<Stack>
+								<SimpleGrid
+									columns={{ base: 1, md: 2, lg: 3 }}
+									gap={{ base: "5", md: "6" }}
+								>
+									{stats.map(
+										({
+											label,
+											labelColor,
+											value,
+											dual,
+											description,
+											currency,
+											decimals,
+										}: Stats) => (
+											<Stat
+												key={label}
+												label={label}
+												labelColor={labelColor}
+												value={value}
+												dual={dual}
+												description={description}
+												decimals={decimals}
+												currency={currency}
+											/>
+										)
+									)}
+								</SimpleGrid>
+								<HStack pt={2}>
+									<Icon as={MdOutlineInfo} boxSize="6" />
+									<Text fontSize={isDesktop ? "md" : "sm"}>
+										Click on the stats to read more about
+										each category.
+									</Text>
+								</HStack>
+							</Stack>
 						</HStack>
 					</Stack>
 				</EaseInWithSlidingAnimation>
