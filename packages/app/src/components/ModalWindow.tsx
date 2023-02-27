@@ -70,7 +70,12 @@ export default function ModalWindow(props: ModelWindowProps) {
 			>
 				<ModalHeader>
 					<HStack>
-						<Link href="https://climateneutralcardano.org">
+						<Link
+							href="https://climateneutralcardano.org"
+							boxShadow="none"
+							border="none"
+							_focus={{ boxShadow: "none", border: "none" }}
+						>
 							<Logo size={32} />
 						</Link>
 						{title}
