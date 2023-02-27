@@ -7,6 +7,7 @@ import {
 	SimpleGrid,
 	Stack,
 	Text,
+	useDisclosure,
 } from "@chakra-ui/react";
 import ContentCenter from "../components/shell/ContentCenter";
 import { SocialMedia } from "../components/shell/SocialMedia";
@@ -23,6 +24,7 @@ import Thermometer from "../components/thermometer";
 import DesktopLogos from "../components/shell/DesktopLogos";
 import MobileLogos from "../components/shell/MobileLogos";
 import { getStats, Stats } from "../components/data/_data";
+import ModalWindow from "../components/ModalWindow";
 
 export default function Home() {
 	const { isDesktop, isTablet } = useContext(AppContext);
@@ -67,7 +69,31 @@ export default function Home() {
 				walletdonations < goalADA ? goalADA - walletdonations : 0
 			);
 		}, 10);
+
+		setTimeout(() => {
+			if (!popoverClosed) {
+				setPopoverToClosed(true);
+				onOpen();
+			}
+		}, 10000);
 	}, [walletdonations]);
+
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [popoverClosed, setPopoverToClosed] = useState(false);
+
+	const getModalWindow = () => {
+		return (
+			<ModalWindow
+				header="Get your milestone CNFTs! 🌳"
+				subtitle="You can now mint the CNC Ala's milestone NFTs. These beautiful artworks created by Devin Field (SPO of YOON) include important achievements of the ISPO within their metadata, and they represent a certificate of participation in the world's first #ImpactStaking ISPO."
+				buttonLabel="Mint now 🌱"
+				buttonLink="https://cncala.ada-anvil.io/"
+				isOpen={isOpen}
+				onClose={onClose}
+			/>
+		);
+	};
+
 	return (
 		<ContentCenter>
 			<Stack
@@ -274,6 +300,7 @@ export default function Home() {
 					</Stack>
 				</EaseInWithSlidingAnimation>
 			</Stack>
+			{getModalWindow()}
 		</ContentCenter>
 	);
 }

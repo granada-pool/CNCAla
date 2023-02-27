@@ -70,7 +70,9 @@ export default function ModalWindow(props: ModelWindowProps) {
 			>
 				<ModalHeader>
 					<HStack>
-						<Logo size={32} />
+						<Link href="https://climateneutralcardano.org">
+							<Logo size={32} />
+						</Link>
 						{title}
 					</HStack>
 				</ModalHeader>
@@ -85,7 +87,7 @@ export default function ModalWindow(props: ModelWindowProps) {
 						>
 							{header}
 						</Heading>
-						<Text textAlign="center">{subtitle}</Text>
+						<Text textAlign="justify">{subtitle}</Text>
 						{buttonLabel && buttonLink ? (
 							<Link href={buttonLink}>
 								<Button>{buttonLabel}</Button>
