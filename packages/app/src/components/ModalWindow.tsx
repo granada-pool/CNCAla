@@ -13,12 +13,13 @@ import {
 	ModalOverlay,
 	Stack,
 	Text,
+	Link,
 	useColorModeValue,
 } from "@chakra-ui/react";
 import { AppContext } from "../context";
 import { SocialMedia } from "./shell/SocialMedia";
 import Logo from "./Logo";
-import Link from "next/link";
+import NextLink from "next/link";
 
 interface ModelWindowProps {
 	title?: string;
@@ -94,9 +95,9 @@ export default function ModalWindow(props: ModelWindowProps) {
 						</Heading>
 						<Text textAlign="justify">{subtitle}</Text>
 						{buttonLabel && buttonLink ? (
-							<Link href={buttonLink}>
+							<NextLink href={buttonLink}>
 								<Button>{buttonLabel}</Button>
-							</Link>
+							</NextLink>
 						) : (
 							<></>
 						)}
