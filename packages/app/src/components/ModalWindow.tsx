@@ -4,7 +4,6 @@ import {
 	Button,
 	Heading,
 	HStack,
-	Link,
 	Modal,
 	ModalBody,
 	ModalCloseButton,
@@ -19,6 +18,7 @@ import {
 import { AppContext } from "../context";
 import { SocialMedia } from "./shell/SocialMedia";
 import Logo from "./Logo";
+import Link from "next/link";
 
 interface ModelWindowProps {
 	title?: string;
