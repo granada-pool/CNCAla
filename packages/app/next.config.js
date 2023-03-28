@@ -8,8 +8,11 @@ const nextConfig = {
 	 * @see https://github.com/vercel/next.js/pull/22867
 	 */
 	experimental: {
-		externalDir: true
-	}
+		externalDir: true,
+	},
+	env: {
+		PROJECT_ID: process.env.PROJECT_ID,
+	},
 };
 
 module.exports = nextConfig;
