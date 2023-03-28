@@ -41,7 +41,7 @@ export default function Dashboard() {
 			.then((res) => res.json())
 			.then((donationWalletData) => {
 				const totalDonations = Math.round(
-					Number(donationWalletData["received_sum"]["quantity"]) /
+					Number(donationWalletData["received_sum"][0]["quantity"]) /
 						lovelaceAdaConvertionFactor
 				);
 				setWalletdonations(totalDonations);
