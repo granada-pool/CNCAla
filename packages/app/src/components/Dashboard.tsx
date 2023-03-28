@@ -24,31 +24,27 @@ export default function Dashboard() {
 	const [donationsLeft, setDonationsLeft] = useState(goalADA);
 
 	const stats = getStats(walletdonations, goalADA, isTablet);
+	const lovelaceAdaConvertionFactor = 1000000;
 
 	useEffect(() => {
 		const baseURL =
-			"https://postgrest-api.mainnet.dandelion.reservoir.network";
-		const spoWalletUrl = `${baseURL}/spo_wallet_sum`;
-		const donationWalletUrl = `${baseURL}/donation_wallet_sum`;
+			"https://cardano-mainnet.blockfrost.io/api/v0/addresses/";
 
-		fetch(spoWalletUrl, {
+		const donationWalletUrl = `${baseURL}/addr1qyepertnhz6mjtafljc7562fxxv2wvsrqx2k6ak29v8s8hx8uuzh9vplnwfxx6yqsev5qa2r9475zv2us50dm8dxml0q8tk4sa/total`;
+
+		fetch(donationWalletUrl, {
 			method: "GET",
+			headers: {
+				project_id: process.env.PROJECT_ID,
+			},
 		})
 			.then((res) => res.json())
-			.then((spoWalletData) => {
-				fetch(donationWalletUrl, {
-					method: "GET",
-				})
-					.then((res) => res.json())
-					.then((donationWalletData) => {
-						const totalDonations =
-							spoWalletData[0].donations +
-							donationWalletData[0].donations;
-						setWalletdonations(totalDonations);
-					})
-					.catch((err) => {
-						console.log(err.message);
-					});
+			.then((donationWalletData) => {
+				const totalDonations = Math.round(
+					Number(donationWalletData["received_sum"]["quantity"]) /
+						lovelaceAdaConvertionFactor
+				);
+				setWalletdonations(totalDonations);
 			})
 			.catch((err) => {
 				console.log(err.message);
