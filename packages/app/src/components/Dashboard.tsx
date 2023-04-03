@@ -24,32 +24,54 @@ export default function Dashboard() {
 	const [donationsLeft, setDonationsLeft] = useState(goalADA);
 
 	const stats = getStats(walletdonations, goalADA, isTablet);
+	const baseURL = "https://cardano-mainnet.blockfrost.io/api/v0/addresses";
+
+	const spoDonationWalletAddress =
+		"addr1qyepertnhz6mjtafljc7562fxxv2wvsrqx2k6ak29v8s8hx8uuzh9vplnwfxx6yqsev5qa2r9475zv2us50dm8dxml0q8tk4sa";
+	const directDonationWalletAddress =
+		"addr1q8kdahqnjpjwdha024mdup3h75p5z239r9qhfyzy8x7v3m3ssaukq8dknegkm4c8q30atap7f08qlax7zratelsmgwcsmjpy0p";
 	const lovelaceAdaConvertionFactor = 1000000;
 
 	useEffect(() => {
-		const baseURL =
-			"https://cardano-mainnet.blockfrost.io/api/v0/addresses/";
-
-		const donationWalletUrl = `${baseURL}/addr1qyepertnhz6mjtafljc7562fxxv2wvsrqx2k6ak29v8s8hx8uuzh9vplnwfxx6yqsev5qa2r9475zv2us50dm8dxml0q8tk4sa/total`;
-
-		fetch(donationWalletUrl, {
-			method: "GET",
-			headers: {
-				project_id: process.env.PROJECT_ID,
-			},
-		})
-			.then((res) => res.json())
-			.then((donationWalletData) => {
-				const totalDonations = Math.round(
-					Number(donationWalletData["received_sum"][0]["quantity"]) /
-						lovelaceAdaConvertionFactor
+		const fetchDonations = async () => {
+			const responseSpoDonationWallet = await fetch(
+				`${baseURL}/${spoDonationWalletAddress}/total`,
+				{
+					method: "GET",
+					headers: {
+						project_id: process.env.PROJECT_ID,
+					},
+				}
+			);
+			const spoDonationWalletData =
+				await responseSpoDonationWallet.json();
+			const responseDirectDonationWallet = await fetch(
+				`${baseURL}/${directDonationWalletAddress}/total`,
+				{
+					method: "GET",
+					headers: {
+						project_id: process.env.PROJECT_ID,
+					},
+				}
+			);
+			const directDonationWalletData =
+				await responseDirectDonationWallet.json();
+			const totalDonations =
+				Math.round(
+					Number(
+						spoDonationWalletData["received_sum"][0]["quantity"]
+					) / lovelaceAdaConvertionFactor
+				) +
+				Math.round(
+					Number(
+						directDonationWalletData["received_sum"][0]["quantity"]
+					) / lovelaceAdaConvertionFactor
 				);
-				setWalletdonations(totalDonations);
-			})
-			.catch((err) => {
-				console.log(err.message);
-			});
 
+			setWalletdonations(totalDonations);
+		};
+
+		fetchDonations();
 		setTimeout(() => {
 			setDonationsLeft(
 				walletdonations < goalADA ? goalADA - walletdonations : 0
