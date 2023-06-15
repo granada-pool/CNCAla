@@ -28,7 +28,7 @@ export default function Wizard({
 }) {
 	const [currentStep, actions] = useStep({
 		maxStep: steps.length,
-		initialStep: 2,
+		initialStep: 4,
 	});
 
 	return (
