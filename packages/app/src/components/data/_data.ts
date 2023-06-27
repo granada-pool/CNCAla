@@ -16,7 +16,7 @@ const getStats = (walletdonations, goalADA, isTablet) => {
 		labelColor: "lightgreen",
 		dual: [
 			{ label: "In Pot", value: 6334 },
-			{ label: "In Ground", value: 8241 },
+			{ label: "In Ground", value: 9085 },
 		],
 		description:
 			"In Pot- total seeds or seedlings planted either in germinator or pot, and the total in Ground- seedlings or young trees planted in the ground at site.",
@@ -34,7 +34,7 @@ const getStats = (walletdonations, goalADA, isTablet) => {
 	const hoursWorked = {
 		label: "Hours Worked",
 		labelColor: "lightgreen",
-		value: 15263,
+		value: 16895,
 		description:
 			"Total number of hours worked and paid for by the project.",
 	};
