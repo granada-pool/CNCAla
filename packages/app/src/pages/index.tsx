@@ -32,7 +32,7 @@ export default function Home() {
 		return (
 			<ModalWindow
 				header="The CNC Ala Raffle is LIVE! 🌳"
-				subtitle="Help us reach the ₳100k milestone in donations and participate to win prizes worth 8,000 ADA! This also Cardano's first raffle to use a Marlowe smart contract to randomly pick and pay the winners. Only 600 tickets will be sold so hurry up!"
+				subtitle="Help us reach the ₳100k milestone in donations and participate to win prizes worth 8,000 ADA! This is also Cardano's first raffle using a Marlowe smart contract to randomly pick and pay the winners. Only 600 tickets will be sold so hurry up!"
 				buttonLabel="Mint now 🌱"
 				buttonLink="https://climateneutralcardano.org/raffle"
 				isOpen={isOpen}
