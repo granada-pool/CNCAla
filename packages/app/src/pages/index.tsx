@@ -17,7 +17,6 @@ export default function Home() {
 	const { isDesktop } = useContext(AppContext);
 
 	useEffect(() => {
-
 		setTimeout(() => {
 			if (!popoverClosed) {
 				setPopoverToClosed(true);
@@ -32,10 +31,10 @@ export default function Home() {
 	const getModalWindow = () => {
 		return (
 			<ModalWindow
-				header="Get your milestone CNFTs! 🌳"
-				subtitle="You can now mint the CNC Ala's milestone NFTs. These beautiful artworks created by Devin Field (SPO of YOON) include important achievements of the ISPO within their metadata, and they represent a certificate of participation in the world's first #ImpactStaking ISPO."
+				header="The CNC Ala Raffle is LIVE! 🌳"
+				subtitle="Help us reach the ₳100k milestone in donations and participate to win prizes worth 8,000 ADA! This also Cardano's first raffle to use a Marlowe smart contract to randomly pick and pay the winners. Only 600 tickets will be sold so hurry up!"
 				buttonLabel="Mint now 🌱"
-				buttonLink="https://cncala.ada-anvil.io/"
+				buttonLink="https://climateneutralcardano.org/raffle"
 				isOpen={isOpen}
 				onClose={onClose}
 			/>
