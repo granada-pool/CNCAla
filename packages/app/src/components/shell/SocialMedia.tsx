@@ -27,7 +27,6 @@ export const SocialMedia = () => {
 			{socials.map((social) => (
 				<Link key={social.label} href={social.href} isExternal>
 					<IconButton
-						as="a"
 						aria-label={social.label}
 						icon={social.icon}
 						color={"gray.50"}
