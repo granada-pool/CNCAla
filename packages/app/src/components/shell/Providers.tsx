@@ -1,5 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { MeshProvider } from "@meshsdk/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { queryClient } from "../../config";
@@ -13,7 +14,9 @@ export function Providers({ children }) {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ChakraProvider theme={theme}>
-				<AppProvider>{children}</AppProvider>
+				<MeshProvider>
+					<AppProvider>{children}</AppProvider>
+				</MeshProvider>
 			</ChakraProvider>
 			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>

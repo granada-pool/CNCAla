@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { PropsWithChildren, useContext } from "react";
 
 import {
 	Button,
@@ -20,8 +20,9 @@ import { AppContext } from "../context";
 import { SocialMedia } from "./shell/SocialMedia";
 import Logo from "./Logo";
 import NextLink from "next/link";
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 
-interface ModelWindowProps {
+interface ModalWindowProps {
 	title?: string;
 	header?: string;
 	subtitle?: string;
@@ -31,10 +32,11 @@ interface ModelWindowProps {
 	backgroundColor?: string;
 	shadowColor?: string;
 	isOpen: boolean;
+	children: ReactJSXElement;
 	onClose: () => void;
 }
 
-export default function ModalWindow(props: ModelWindowProps) {
+export default function ModalWindow(props: ModalWindowProps) {
 	const {
 		title,
 		header,
@@ -45,6 +47,7 @@ export default function ModalWindow(props: ModelWindowProps) {
 		shadowColor,
 		isOpen,
 		onClose,
+		children,
 	} = props;
 	const fallbackBackgroundColor = useColorModeValue("gray.50", "gray.800");
 	const { isDesktop } = useContext(AppContext);
@@ -68,6 +71,7 @@ export default function ModalWindow(props: ModelWindowProps) {
 				minH={{ base: "xs", lg: "sm" }}
 				minW={{ base: "xs" }}
 				rounded="xl"
+				px={4}
 			>
 				<ModalHeader>
 					<HStack>
@@ -76,8 +80,9 @@ export default function ModalWindow(props: ModelWindowProps) {
 							boxShadow="none"
 							border="none"
 							_focus={{ boxShadow: "none", border: "none" }}
+							ml={-4}
 						>
-							<Logo size={32} />
+							<Logo size={32} ml={-4} />
 						</Link>
 						{title}
 					</HStack>
@@ -101,6 +106,7 @@ export default function ModalWindow(props: ModelWindowProps) {
 						) : (
 							<></>
 						)}
+						{children}
 					</Stack>
 				</ModalBody>
 				<ModalFooter textAlign={"center"} alignSelf="center">
