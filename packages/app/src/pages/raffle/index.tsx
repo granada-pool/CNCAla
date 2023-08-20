@@ -24,7 +24,7 @@ export default function Raffle() {
 			return (
 				<ModalWindow
 					header="Congratulations, lucky winner!"
-					subtitle="Your prize is a few clicks away. Thank you for participating and for helping us boost our impact in Madagascar!"
+					subtitle="Your prize is a few clicks away. Thank you so much for participating and for helping us boost our impact in Madagascar!"
 					isOpen={isOpen}
 					onClose={onClose}
 				>
@@ -44,7 +44,7 @@ export default function Raffle() {
 		return (
 			<ModalWindow
 				header="Better luck next time!"
-				subtitle="Unfortunately, we couldn't find the winner NFT in the connected wallet. Thank you for participating and for helping us boost our impact in Madagascar!"
+				subtitle="Unfortunately, we couldn't find any winner NFT in your wallet. Thank you so much for participating and for helping us boost our impact in Madagascar!"
 				isOpen={isOpen}
 				onClose={onClose}
 			>
@@ -77,7 +77,7 @@ export default function Raffle() {
 
 	return (
 		<Container alignSelf={"center"}>
-			<Stack spacing={{ base: "16" }} pt="16" align="center">
+			<Stack spacing={{ base: "10" }} pt="16" align="center">
 				<Heading size={"lg"}>
 					{"CNC Ala Raffle's Claiming Portal"}
 				</Heading>
@@ -85,7 +85,7 @@ export default function Raffle() {
 					<Text
 						overflowWrap="break-word"
 						w={"2xl"}
-						fontSize={"md"}
+						fontSize={"xl"}
 						align="center"
 					>
 						{
@@ -95,7 +95,7 @@ export default function Raffle() {
 					<Text
 						overflowWrap="break-word"
 						w={"2xl"}
-						fontSize={"md"}
+						fontSize={"xl"}
 						align="center"
 					>
 						{"please connect your wallet to claim your prize! 🌳"}

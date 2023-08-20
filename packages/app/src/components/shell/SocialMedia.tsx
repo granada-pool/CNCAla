@@ -5,17 +5,17 @@ import { FaDiscord, FaTelegramPlane, FaTwitter } from "react-icons/fa";
 const socials = [
 	{
 		label: "Discord",
-		icon: <FaDiscord fontSize="1.25rem" />,
+		icon: <FaDiscord size="1.25rem" />,
 		href: "https://discord.gg/S7AvwgKVcW",
 	},
 	{
 		label: "Twitter",
-		icon: <FaTwitter fontSize="1.25rem" />,
+		icon: <FaTwitter size="1.25rem" />,
 		href: "https://twitter.com/CNCardano",
 	},
 	{
 		label: "FaTelegramPlane",
-		icon: <FaTelegramPlane fontSize="1.25rem" />,
+		icon: <FaTelegramPlane size="1.25rem" />,
 		href: "https://t.me/+eR_00UAp9PY5N2Iy",
 	},
 ];

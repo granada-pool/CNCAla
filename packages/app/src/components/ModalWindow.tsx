@@ -31,8 +31,8 @@ interface ModalWindowProps {
 	buttonLink?: string;
 	backgroundColor?: string;
 	shadowColor?: string;
+	children?: ReactJSXElement;
 	isOpen: boolean;
-	children: ReactJSXElement;
 	onClose: () => void;
 }
 
@@ -68,8 +68,6 @@ export default function ModalWindow(props: ModalWindowProps) {
 				boxShadow={`0 0 7px 1px ${
 					shadowColor ? shadowColor : "#48BB78"
 				}`}
-				minH={{ base: "xs", lg: "sm" }}
-				minW={{ base: "xs" }}
 				rounded="xl"
 				px={4}
 			>
@@ -88,7 +86,7 @@ export default function ModalWindow(props: ModalWindowProps) {
 					</HStack>
 				</ModalHeader>
 				<ModalCloseButton _focus={{ boxShadow: "none" }} />
-				<ModalBody mt={{ base: 0, lg: 8 }}>
+				<ModalBody>
 					<Stack align="center" spacing={6}>
 						<Heading
 							as="h3"
