@@ -5,9 +5,11 @@ import {
 	Heading,
 	Button,
 	useDisclosure,
+	Box,
 } from "@chakra-ui/react";
 import ModalWindow from "@cncala/app/components/ModalWindow";
 import { CardanoWallet, useAssets, useWallet } from "@meshsdk/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -77,11 +79,11 @@ export default function Raffle() {
 
 	return (
 		<Container alignSelf={"center"}>
-			<Stack spacing={{ base: "10" }} pt="16" align="center">
+			<Stack spacing={{ base: "0" }} pt="16" align="center">
 				<Heading size={"lg"}>
 					{"CNC Ala Raffle's Claiming Portal"}
 				</Heading>
-				<Stack spacing="0">
+				<Stack py="10">
 					<Text
 						overflowWrap="break-word"
 						w={"2xl"}
@@ -102,6 +104,12 @@ export default function Raffle() {
 					</Text>
 				</Stack>
 				<CardanoWallet />
+				<Image
+					src="/assets/images/winner_nfts.png"
+					alt={"Winner NFTs"}
+					width={1100}
+					height={600}
+				/>
 			</Stack>
 			{connected ? getModalWindow() : <></>}
 		</Container>
