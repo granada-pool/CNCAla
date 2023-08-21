@@ -6,8 +6,10 @@ import {
 	Button,
 	useDisclosure,
 	Box,
+	Center,
 } from "@chakra-ui/react";
 import ModalWindow from "@cncala/app/components/ModalWindow";
+import { EaseInWithSlidingAnimation } from "@cncala/app/components/animations/EaseInWithSlidingAnimation";
 import { CardanoWallet, useAssets, useWallet } from "@meshsdk/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -80,37 +82,46 @@ export default function Raffle() {
 	return (
 		<Container alignSelf={"center"}>
 			<Stack spacing={{ base: "0" }} pt="16" align="center">
-				<Heading size={"lg"}>
-					{"CNC Ala Raffle's Claiming Portal"}
-				</Heading>
-				<Stack py="10">
-					<Text
-						overflowWrap="break-word"
-						w={"2xl"}
-						fontSize={"xl"}
-						align="center"
-					>
-						{
-							"If you received the winning NFT from our Marlowe smart contract,"
-						}
-					</Text>
-					<Text
-						overflowWrap="break-word"
-						w={"2xl"}
-						fontSize={"xl"}
-						align="center"
-					>
-						{"please connect your wallet to claim your prize! 🌳"}
-					</Text>
-				</Stack>
-				<CardanoWallet />
-				<Image
-					src="/assets/images/winner_nfts.png"
-					alt={"Winner NFTs"}
-					width={1100}
-					height={600}
-				/>
+				<EaseInWithSlidingAnimation>
+					<Heading size={"lg"}>
+						{"CNC Ala Raffle's Claiming Portal"}
+					</Heading>
+					<Stack py="10">
+						<Text
+							overflowWrap="break-word"
+							w={"2xl"}
+							fontSize={"xl"}
+							align="center"
+						>
+							{
+								"If you received the winning NFT from our Marlowe smart contract,"
+							}
+						</Text>
+						<Text
+							overflowWrap="break-word"
+							w={"2xl"}
+							fontSize={"xl"}
+							align="center"
+						>
+							{
+								"please connect your wallet to claim your prize! 🌳"
+							}
+						</Text>
+					</Stack>
+					<Center>
+						<CardanoWallet />
+					</Center>
+				</EaseInWithSlidingAnimation>
+				<EaseInWithSlidingAnimation initY={20} delay={0.5}>
+					<Image
+						src="/assets/images/winner_nfts.png"
+						alt={"Winner NFTs"}
+						width={1100}
+						height={600}
+					/>
+				</EaseInWithSlidingAnimation>
 			</Stack>
+
 			{connected ? getModalWindow() : <></>}
 		</Container>
 	);
