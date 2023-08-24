@@ -31,10 +31,10 @@ export default function Home() {
 	const getModalWindow = () => {
 		return (
 			<ModalWindow
-				header="The CNC Ala Raffle is LIVE! 🌳"
-				subtitle="Help us reach the ₳100k milestone in donations and participate to win prizes worth 8,000 ADA! This is also Cardano's first raffle using a Marlowe smart contract to randomly pick and pay the winners. Only 600 tickets will be sold so hurry up!"
-				buttonLabel="Mint now 🌱"
-				buttonLink="https://climateneutralcardano.org/raffle"
+				header="The CNC Ala Raffle is over! 🌳"
+				subtitle="Thank you so much for participating and for supporting our efforts in Madagascar. ❤️ If you received a winner NFT from our Marlowe smart contract, get your prize now on our claiming portal!"
+				buttonLabel="Claim Now"
+				buttonLink="https://cncala.climateneutralcardano.org/raffle"
 				isOpen={isOpen}
 				onClose={onClose}
 			/>
@@ -121,7 +121,7 @@ export default function Home() {
 					</Stack>
 				</EaseInWithSlidingAnimation>
 			</Stack>
-			{getModalWindow()}
+			{/*getModalWindow()*/}
 		</ContentCenter>
 	);
 }

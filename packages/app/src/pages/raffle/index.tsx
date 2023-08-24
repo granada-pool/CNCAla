@@ -5,7 +5,6 @@ import {
 	Heading,
 	Button,
 	useDisclosure,
-	Box,
 	Center,
 } from "@chakra-ui/react";
 import ModalWindow from "@cncala/app/components/ModalWindow";
@@ -21,7 +20,18 @@ export default function Raffle() {
 	const [isWinner, setIsWinner] = useState(false);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const winnerPolicyId =
-		"f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a";
+		"13ff06b51c6c6b4d171255280027982d8e50055470516614195b4ec6";
+
+	useEffect(() => {
+		if (assets && connected) {
+			assets.map((asset) => {
+				if (winnerPolicyId === asset["policyId"]) {
+					setIsWinner(true);
+				}
+			});
+			onOpen();
+		}
+	}, [assets]);
 
 	const getModalWindow = () => {
 		if (isWinner) {
@@ -67,17 +77,6 @@ export default function Raffle() {
 			</ModalWindow>
 		);
 	};
-
-	useEffect(() => {
-		if (assets && connected) {
-			assets.map((asset) => {
-				if (winnerPolicyId === asset["policyId"]) {
-					setIsWinner(true);
-				}
-			});
-			onOpen();
-		}
-	}, [assets]);
 
 	return (
 		<Container alignSelf={"center"}>
