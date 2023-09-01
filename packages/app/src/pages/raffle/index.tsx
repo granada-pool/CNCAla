@@ -13,9 +13,10 @@ import { CardanoWallet, useAssets, useWallet } from "@meshsdk/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Props, useWithdrawal } from "@cncala/app/marlowe/marlowe-raffle.js";
 
 export default function Raffle() {
-	const { connected } = useWallet();
+	const { wallet, connected } = useWallet();
 	const assets = useAssets();
 	const [isWinner, setIsWinner] = useState(false);
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,6 +25,7 @@ export default function Raffle() {
 
 	useEffect(() => {
 		if (assets && connected) {
+			console.log(wallet);
 			assets.map((asset) => {
 				if (winnerPolicyId === asset["policyId"]) {
 					setIsWinner(true);
@@ -32,6 +34,87 @@ export default function Raffle() {
 			onOpen();
 		}
 	}, [assets]);
+
+	const Withdrawal = (wallet: any) => {
+		const props: Props = {
+			network: "preprod",
+			wallet,
+			txOutRef: {
+				txId: "c93175feff92ddfb571f4d12b9d34ab910594dce54ad4017a5670a0b43a930f5",
+				// txId: "3605db0c5ae9be7623cd4ecb04f8e99d784da35258f2952896b25f7613968b54",
+				txIx: 2,
+			},
+			blockfrostProjectId: "preprodD9cONxVqzHYtFEL4RObOZ46y4begqNHc",
+		};
+		const { status, reset } = useWithdrawal(props);
+
+		let action, body, initProblem, isWinner, alreadyClaimed;
+
+		console.log(status);
+		switch (status.status) {
+			case "AwaitingWithdrawalTrigger":
+				body = (
+					<button onClick={status.trigger}>Claim your prize</button>
+				);
+				break;
+			case "WithdrawalSucceeded":
+				body = (
+					<div>
+						<p>
+							Price should be visible in your wallet soon your
+							wallet. Here is payout tx:
+						</p>
+						<a
+							href={`https://${props.network}.cardanoscan.io/transaction/${status.txId}`}
+							target="_blank"
+							rel="noreferrer"
+						>
+							{status.txId}
+						</a>
+					</div>
+				);
+				break;
+			case "WithdrawalFailed":
+				var retry = status.retry;
+				body = (
+					<div>
+						<p>
+							Something went wrong. Please try again or contact
+							support.
+						</p>
+						<button onClick={retry}>Try again</button>
+					</div>
+				);
+				break;
+			case "FatalError":
+				body = "Fatal error. Please contact support.";
+				break;
+			case "InitializationFailed":
+				switch (status.error.tag) {
+					// If role token was not found this wallet is probably not a winner
+					case "FindRoleTokenUTxOError":
+						body = "Sorry, you are not a winner";
+						break;
+					// If payout utxo was already spent, this wallet has already claimed its price
+					case "PayoutUTxOAlreadySpentError":
+						body = "You have already claimed your prize";
+						break;
+					// Otherwise it is a serious problem - non recoverable:
+					default:
+						body = "Serious problem - report sent to admin ;-)";
+						break;
+				}
+				break;
+			case "Initializing":
+				body = "Checking your price claim...";
+				break;
+			case "ProcessingWithdrawal":
+				body = "Processing withdrawal...";
+				break;
+		}
+
+		return <div>{body}</div>;
+	};
 
 	const getModalWindow = () => {
 		if (isWinner) {
@@ -115,13 +198,17 @@ export default function Raffle() {
 					<Image
 						src="/assets/images/winner_nfts.png"
 						alt={"Winner NFTs"}
-						width={1100}
+						width={800}
 						height={600}
 					/>
 				</EaseInWithSlidingAnimation>
 			</Stack>
-
 			{connected ? getModalWindow() : <></>}
+			{connected ? (
+				<Withdrawal props={wallet["_walletInstance"]}></Withdrawal>
+			) : (
+				<>{"not connected"}</>
+			)}
 		</Container>
 	);
 }
