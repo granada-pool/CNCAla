@@ -35,10 +35,10 @@ export default function Raffle() {
 		}
 	}, [assets]);
 
-	const Withdrawal = (wallet: any) => {
-		const props: Props = {
+	const Withdrawal = (wallet:any) => {
+		const hookProps: Props = {
 			network: "preprod",
-			wallet,
+			wallet: wallet.wallet,
 			txOutRef: {
 				txId: "c93175feff92ddfb571f4d12b9d34ab910594dce54ad4017a5670a0b43a930f5",
 				// txId: "3605db0c5ae9be7623cd4ecb04f8e99d784da35258f2952896b25f7613968b54",
@@ -46,7 +46,7 @@ export default function Raffle() {
 			},
 			blockfrostProjectId: "preprodD9cONxVqzHYtFEL4RObOZ46y4begqNHc",
 		};
-		const { status, reset } = useWithdrawal(props);
+		const { status, reset } = useWithdrawal(hookProps);
 
 		let action, body, initProblem, isWinner, alreadyClaimed;
 
@@ -205,7 +205,7 @@ export default function Raffle() {
 			</Stack>
 			{connected ? getModalWindow() : <></>}
 			{connected ? (
-				<Withdrawal props={wallet["_walletInstance"]}></Withdrawal>
+				<Withdrawal wallet={wallet["_walletInstance"]}></Withdrawal>
 			) : (
 				<>{"not connected"}</>
 			)}
