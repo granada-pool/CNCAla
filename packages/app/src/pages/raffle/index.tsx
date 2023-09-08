@@ -35,7 +35,7 @@ export default function Raffle() {
 		}
 	}, [assets]);
 
-	const Withdrawal = (wallet:any) => {
+	const Withdrawal = (wallet: any) => {
 		const hookProps: Props = {
 			network: "preprod",
 			wallet: wallet.wallet,
@@ -65,7 +65,7 @@ export default function Raffle() {
 							wallet. Here is payout tx:
 						</p>
 						<a
-							href={`https://${props.network}.cardanoscan.io/transaction/${status.txId}`}
+							href={`https://${hookProps.network}.cardanoscan.io/transaction/${status.txId}`}
 							target="_blank"
 							rel="noreferrer"
 						>
