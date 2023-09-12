@@ -3,175 +3,40 @@ import {
 	Text,
 	Stack,
 	Heading,
-	Button,
 	useDisclosure,
 	Center,
 } from "@chakra-ui/react";
-import ModalWindow from "@cncala/app/components/ModalWindow";
 import { EaseInWithSlidingAnimation } from "@cncala/app/components/animations/EaseInWithSlidingAnimation";
-import { CardanoWallet, useAssets, useWallet } from "@meshsdk/react";
+import { CardanoWallet, useWallet } from "@meshsdk/react";
 import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Props, useWithdrawal } from "@cncala/app/marlowe/marlowe-raffle.js";
+import { useContext, useEffect } from "react";
+import { AppContext } from "@cncala/app/context";
+import RaffleClaimModal from "@cncala/app/components/RaffleClaimModal";
+import DesktopLogosRaffle from "@cncala/app/components/shell/DesktopLogosRaffle";
+import MobileLogosRaffle from "@cncala/app/components/shell/MobileLogosRaffle";
 
 export default function Raffle() {
+	const { isDesktop } = useContext(AppContext);
 	const { wallet, connected } = useWallet();
-	const assets = useAssets();
-	const [isWinner, setIsWinner] = useState(false);
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const winnerPolicyId =
-		"13ff06b51c6c6b4d171255280027982d8e50055470516614195b4ec6";
 
 	useEffect(() => {
-		if (assets && connected) {
-			console.log(wallet);
-			assets.map((asset) => {
-				if (winnerPolicyId === asset["policyId"]) {
-					setIsWinner(true);
-				}
-			});
+		if (connected && wallet["_walletInstance"]) {
 			onOpen();
 		}
-	}, [assets]);
-
-	const Withdrawal = (wallet: any) => {
-		const hookProps: Props = {
-			network: "preprod",
-			wallet: wallet.wallet,
-			txOutRef: {
-				txId: "c93175feff92ddfb571f4d12b9d34ab910594dce54ad4017a5670a0b43a930f5",
-				// txId: "3605db0c5ae9be7623cd4ecb04f8e99d784da35258f2952896b25f7613968b54",
-				txIx: 2,
-			},
-			blockfrostProjectId: "preprodD9cONxVqzHYtFEL4RObOZ46y4begqNHc",
-		};
-		const { status, reset } = useWithdrawal(hookProps);
-
-		let action, body, initProblem, isWinner, alreadyClaimed;
-
-		console.log(status);
-		switch (status.status) {
-			case "AwaitingWithdrawalTrigger":
-				body = (
-					<button onClick={status.trigger}>Claim your prize</button>
-				);
-				break;
-			case "WithdrawalSucceeded":
-				body = (
-					<div>
-						<p>
-							Price should be visible in your wallet soon your
-							wallet. Here is payout tx:
-						</p>
-						<a
-							href={`https://${hookProps.network}.cardanoscan.io/transaction/${status.txId}`}
-							target="_blank"
-							rel="noreferrer"
-						>
-							{status.txId}
-						</a>
-					</div>
-				);
-				break;
-			case "WithdrawalFailed":
-				var retry = status.retry;
-				body = (
-					<div>
-						<p>
-							Something went wrong. Please try again or contact
-							support.
-						</p>
-						<button onClick={retry}>Try again</button>
-					</div>
-				);
-				break;
-			case "FatalError":
-				body = "Fatal error. Please contact support.";
-				break;
-			case "InitializationFailed":
-				switch (status.error.tag) {
-					// If role token was not found this wallet is probably not a winner
-					case "FindRoleTokenUTxOError":
-						body = "Sorry, you are not a winner";
-						break;
-					// If payout utxo was already spent, this wallet has already claimed its price
-					case "PayoutUTxOAlreadySpentError":
-						body = "You have already claimed your prize";
-						break;
-					// Otherwise it is a serious problem - non recoverable:
-					default:
-						body = "Serious problem - report sent to admin ;-)";
-						break;
-				}
-				break;
-			case "Initializing":
-				body = "Checking your price claim...";
-				break;
-			case "ProcessingWithdrawal":
-				body = "Processing withdrawal...";
-				break;
-		}
-
-		return <div>{body}</div>;
-	};
-
-	const getModalWindow = () => {
-		if (isWinner) {
-			return (
-				<ModalWindow
-					header="Congratulations, lucky winner!"
-					subtitle="Your prize is a few clicks away. Thank you so much for participating and for helping us boost our impact in Madagascar!"
-					isOpen={isOpen}
-					onClose={onClose}
-				>
-					<Button
-						w="2xs"
-						bgColor="olivedrab"
-						borderRadius="20px"
-						_hover={{
-							bgColor: "green",
-						}}
-					>
-						{"Claim Prize"}
-					</Button>
-				</ModalWindow>
-			);
-		}
-		return (
-			<ModalWindow
-				header="Better luck next time!"
-				subtitle="Unfortunately, we couldn't find any winner NFT in your wallet. Thank you so much for participating and for helping us boost our impact in Madagascar!"
-				isOpen={isOpen}
-				onClose={onClose}
-			>
-				<Link href="/">
-					<Button
-						w="2xs"
-						bgColor="olivedrab"
-						borderRadius="20px"
-						_hover={{
-							bgColor: "green",
-						}}
-					>
-						{"Discover the CNC Ala"}
-					</Button>
-				</Link>
-			</ModalWindow>
-		);
-	};
+	}, [connected]);
 
 	return (
 		<Container alignSelf={"center"}>
 			<Stack spacing={{ base: "0" }} pt="16" align="center">
 				<EaseInWithSlidingAnimation>
-					<Heading size={"lg"}>
+					<Heading size={isDesktop ? "lg" : "md"}>
 						{"CNC Ala Raffle's Claiming Portal"}
 					</Heading>
 					<Stack py="10">
 						<Text
 							overflowWrap="break-word"
-							w={"2xl"}
+							w={isDesktop ? "2xl" : "100%"}
 							fontSize={"xl"}
 							align="center"
 						>
@@ -181,7 +46,7 @@ export default function Raffle() {
 						</Text>
 						<Text
 							overflowWrap="break-word"
-							w={"2xl"}
+							w={isDesktop ? "2xl" : "100%"}
 							fontSize={"xl"}
 							align="center"
 						>
@@ -202,12 +67,29 @@ export default function Raffle() {
 						height={600}
 					/>
 				</EaseInWithSlidingAnimation>
+				<EaseInWithSlidingAnimation>
+					<Stack
+						spacing="4"
+						direction={isDesktop ? "row" : "column"}
+						align={"center"}
+						pb={16}
+					>
+						{isDesktop ? (
+							<DesktopLogosRaffle />
+						) : (
+							<MobileLogosRaffle />
+						)}
+					</Stack>
+				</EaseInWithSlidingAnimation>
 			</Stack>
-			{connected ? getModalWindow() : <></>}
 			{connected ? (
-				<Withdrawal wallet={wallet["_walletInstance"]}></Withdrawal>
+				<RaffleClaimModal
+					wallet={wallet["_walletInstance"]}
+					isOpen={isOpen}
+					onClose={onClose}
+				/>
 			) : (
-				<>{"not connected"}</>
+				<></>
 			)}
 		</Container>
 	);
