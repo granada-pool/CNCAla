@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 
 import {
 	Button,
@@ -22,62 +22,49 @@ import { SocialMedia } from "./shell/SocialMedia";
 import Logo from "./Logo";
 import { Props, useWithdrawal } from "../marlowe/marlowe-raffle";
 import CNCSpinner from "./shell/CNCSpinner";
-
+import { Asset } from "@meshsdk/core";
 interface ModalWindowProps {
 	wallet: any;
+	assets: Asset[];
 	isOpen: boolean;
 	onClose: () => void;
 }
 
 export default function RaffleClaimModal(props: ModalWindowProps) {
-	const txIds = [
-		// V17 "9ff6883e1927db0cc4b96456c122e3dafa9ead72e2cb145c977d3c97c6e04a35",
-		"sssad238sdfsdfsdfsdfj23ir932iro34jro34ijro3i4jro3i4jro3i4jror92r",
-		"2eb616d46e85f080f484305bc23148c2b912554f02e97240c5b0ec0d81dd06e6",
-		"b7e9df0cdb75a7f05fead74ec8b0fbaf42ad76c7346b1285bb4730500c4f9f68",
-		"9ff6883e1927db0cc4b96456c122e3dafa9ead72e2cb145c977d3c97c6e04a35",
-	];
-	const { wallet, isOpen, onClose } = props;
+	const { wallet, assets, isOpen, onClose } = props;
+	const txIds: { [key: string]: string } = {
+		asset123:
+			"9ff6883e1927db0cc4b96456c122e3dafa9ead72e2cb145c977d3c97c6e04a35",
+		asset14rsn24m6tr4e0fu4r099295688m5hh3z5vlsrq:
+			"2eb616d46e85f080f484305bc23148c2b912554f02e97240c5b0ec0d81dd06e6",
+		asset789:
+			"b7e9df0cdb75a7f05fead74ec8b0fbaf42ad76c7346b1285bb4730500c4f9f68",
+	};
+
 	const backgroundColor = useColorModeValue("gray.50", "gray.800");
 	const { isDesktop } = useContext(AppContext);
-	const [currentTxIdIndex, setTxIdIndex] = useState(0);
+
+	const getTxId = () => {
+		const asset = assets.find(
+			(asset) => txIds[asset["fingerprint"]] !== undefined
+		);
+		if (!asset) {
+			return "none";
+		}
+		return txIds[asset["fingerprint"]];
+	};
+
 	const hookProps: Props = {
 		network: "preprod",
 		wallet: wallet,
 		txOutRef: {
-			txId: txIds[currentTxIdIndex], //"9ff6883e1927db0cc4b96456c122e3dafa9ead72e2cb145c977d3c97c6e04a35",
-			// txId: "c5d5e46a159c3caf563929ad7b5915f554cce0883e7790c4a11b20c808581cff",
-			//txId: "c93175feff92ddfb571f4d12b9d34ab910594dce54ad4017a5670a0b43a930f5",
-			// txId: "3605db0c5ae9be7623cd4ecb04f8e99d784da35258f2952896b25f7613968b54",
+			txId: getTxId(),
 			txIx: 2,
 		},
 		blockfrostProjectId: "preprodD9cONxVqzHYtFEL4RObOZ46y4begqNHc",
 	};
 
 	const { status, reset } = useWithdrawal(hookProps);
-
-	useEffect(() => {
-		if (status.status === "Initializing") {
-			console.log("Initializing for " + currentTxIdIndex);
-		}
-
-		if (
-			status.status === "InitializationFailed" &&
-			currentTxIdIndex < txIds.length
-		) {
-			setTxIdIndex(currentTxIdIndex + 1);
-			console.log(currentTxIdIndex);
-			const newHookProps = {
-				network: "preprod",
-				wallet: wallet,
-				txOutRef: { txId: txIds[currentTxIdIndex], txIx: 2 },
-				blockfrostProjectId: "preprodD9cONxVqzHYtFEL4RObOZ46y4begqNHc",
-			} as Props;
-			console.log("calling reset");
-			reset(newHookProps);
-			console.log(newHookProps.txOutRef.txId);
-		}
-	}, [status, currentTxIdIndex]);
 
 	console.log(status);
 
@@ -89,14 +76,6 @@ export default function RaffleClaimModal(props: ModalWindowProps) {
 	const animation = `${animationKeyframes} 2.5s ease-in-out infinite`;
 
 	const getModalContent = () => {
-		return (
-			<Stack py="14">
-				<CNCSpinner />
-				<Text textAlign="center" animation={animation}>
-					{"Looking for winner NFT" + currentTxIdIndex}
-				</Text>
-			</Stack>
-		);
 		switch (status.status) {
 			case "Initializing":
 				return (
