@@ -20,9 +20,11 @@ import {
 import { AppContext } from "../context";
 import { SocialMedia } from "./shell/SocialMedia";
 import Logo from "./Logo";
-import { Props, useWithdrawal } from "../marlowe/marlowe-raffle";
+
 import CNCSpinner from "./shell/CNCSpinner";
 import { Asset } from "@meshsdk/core";
+import { Props, useWithdrawal } from "marlowe-raffle";
+
 interface ModalWindowProps {
 	wallet: any;
 	assets: Asset[];

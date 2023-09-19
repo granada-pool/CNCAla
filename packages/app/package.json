@@ -25,6 +25,7 @@
 		"framer-motion": "^7.6.6",
 		"hex-string": "^1.0.3",
 		"json-bigint": "^1.0.0",
+		"marlowe-raffle": "https://github.com/paluh/marlowe-raffle/raw/main/dist/marlowe-raffle-v0.0.10.tgz",
 		"next": "13.0.2",
 		"react": "18.2.0",
 		"react-countup": "^6.3.2",
