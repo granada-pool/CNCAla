@@ -35,10 +35,10 @@ export default function RaffleClaimModal(props: ModalWindowProps) {
 	const txIds: { [key: string]: string } = {
 		asset123:
 			"9ff6883e1927db0cc4b96456c122e3dafa9ead72e2cb145c977d3c97c6e04a35",
-		asset14rsn24m6tr4e0fu4r099295688m5hh3z5vlsrq:
-			"2eb616d46e85f080f484305bc23148c2b912554f02e97240c5b0ec0d81dd06e6",
-		asset789:
-			"b7e9df0cdb75a7f05fead74ec8b0fbaf42ad76c7346b1285bb4730500c4f9f68",
+		asset1484jke389rsackpwxp55vdzatc92ssclj3hs7n:
+			"9bcf0a1c77bf8c6aa396c2c678fcb7f80c7af0d372d23a3ad8b6cf012c767650",
+		asset1gsywg5lu6ncsxfped87l7e889f7qdh2dvmuvfv:
+			"415270d519e7bf3a37535d0d6185db0be1b4b65a79a7a21da0c02633f04b35a3",
 	};
 
 	const backgroundColor = useColorModeValue("gray.50", "gray.800");

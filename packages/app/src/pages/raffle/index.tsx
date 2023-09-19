@@ -7,7 +7,7 @@ import {
 	Center,
 } from "@chakra-ui/react";
 import { EaseInWithSlidingAnimation } from "@cncala/app/components/animations/EaseInWithSlidingAnimation";
-import { CardanoWallet, useWallet } from "@meshsdk/react";
+import { CardanoWallet, useAssets, useWallet } from "@meshsdk/react";
 import Image from "next/image";
 import { useContext, useEffect } from "react";
 import { AppContext } from "@cncala/app/context";
@@ -18,6 +18,7 @@ import MobileLogosRaffle from "@cncala/app/components/shell/MobileLogosRaffle";
 export default function Raffle() {
 	const { isDesktop } = useContext(AppContext);
 	const { wallet, connected } = useWallet();
+	const assets = useAssets();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	useEffect(() => {
@@ -82,9 +83,10 @@ export default function Raffle() {
 					</Stack>
 				</EaseInWithSlidingAnimation>
 			</Stack>
-			{connected ? (
+			{connected && assets ? (
 				<RaffleClaimModal
 					wallet={wallet["_walletInstance"]}
+					assets={assets}
 					isOpen={isOpen}
 					onClose={onClose}
 				/>
