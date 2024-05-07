@@ -22,6 +22,7 @@ export default function Dashboard() {
 
 	const goalADA = 100000;
 	const [donationsLeft, setDonationsLeft] = useState(goalADA);
+	const [confettiShot, setConfettiShot] = useState(false);
 
 	const stats = getStats(walletdonations, goalADA, isTablet);
 	const baseURL = "https://cardano-mainnet.blockfrost.io/api/v0/addresses";
@@ -77,6 +78,16 @@ export default function Dashboard() {
 				walletdonations < goalADA ? goalADA - walletdonations : 0
 			);
 		}, 10);
+		if (!confettiShot) {
+			setTimeout(() => {
+				confetti({
+					particleCount: 100,
+					spread: 70,
+					origin: { y: 1 },
+				});
+			}, 3000);
+			setConfettiShot(true);
+		}
 	}, [walletdonations]);
 
 	return (
