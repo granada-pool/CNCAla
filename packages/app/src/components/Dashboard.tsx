@@ -80,11 +80,9 @@ export default function Dashboard() {
 		}, 10);
 		if (!confettiShot) {
 			setTimeout(() => {
-				confetti({
-					particleCount: 100,
-					spread: 70,
-					origin: { y: 1 },
-				});
+				setTimeout(shoot, 0);
+				setTimeout(shoot, 100);
+				setTimeout(shoot, 200);
 			}, 3000);
 			setConfettiShot(true);
 		}
@@ -217,4 +215,35 @@ export default function Dashboard() {
 			</Stack>
 		</>
 	);
+}
+
+function shoot() {
+	const scalar = 2;
+	const trees = confetti.shapeFromText({ text: "🌳", scalar });
+	const plantlets = confetti.shapeFromText({ text: "🌱", scalar });
+	const party = confetti.shapeFromText({ text: "🎉", scalar });
+
+	const defaults = {
+		spread: 200,
+		origin: { y: 1 },
+		shapes: [plantlets, trees, party],
+		scalar,
+	};
+
+	confetti({
+		...defaults,
+		particleCount: 30,
+	});
+
+	confetti({
+		...defaults,
+		particleCount: 5,
+		flat: true,
+	});
+	confetti({
+		...defaults,
+		particleCount: 15,
+		scalar: scalar / 2,
+		shapes: ["circle"],
+	});
 }
