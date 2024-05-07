@@ -21,9 +21,7 @@ import { AppContext } from "../context";
 import { SocialMedia } from "./shell/SocialMedia";
 import Logo from "./Logo";
 
-import CNCSpinner from "./shell/CNCSpinner";
 import { Asset } from "@meshsdk/core";
-import { Props, useWithdrawal } from "marlowe-raffle";
 
 interface ModalWindowProps {
 	wallet: any;
@@ -56,18 +54,6 @@ export default function RaffleClaimModal(props: ModalWindowProps) {
 		return txIds[asset["fingerprint"]];
 	};
 
-	const hookProps: Props = {
-		network: "preprod",
-		wallet: wallet,
-		txOutRef: {
-			txId: getTxId(),
-			txIx: 2,
-		},
-		blockfrostProjectId: "preprodD9cONxVqzHYtFEL4RObOZ46y4begqNHc",
-	};
-
-	const { status, reset } = useWithdrawal(hookProps);
-
 	console.log(status);
 
 	const animationKeyframes = keyframes`
@@ -78,7 +64,8 @@ export default function RaffleClaimModal(props: ModalWindowProps) {
 	const animation = `${animationKeyframes} 2.5s ease-in-out infinite`;
 
 	const getModalContent = () => {
-		switch (status.status) {
+		/*
+		switch () {
 			case "Initializing":
 				return (
 					<Stack py="14">
@@ -147,7 +134,7 @@ export default function RaffleClaimModal(props: ModalWindowProps) {
 							w="2xs"
 							bgColor="olivedrab"
 							borderRadius="20px"
-							onClick={status.trigger!}
+							onClick={() => {}}
 							_hover={{
 								bgColor: "green",
 							}}
@@ -191,16 +178,15 @@ export default function RaffleClaimModal(props: ModalWindowProps) {
 									"You should see your prize on your wallet soon. You can check the transaction here:"
 								}
 							</Text>
-							<Link
-								href={`https://${hookProps.network}.cardanoscan.io/transaction/${status.txId}`}
-								target="_blank"
-							>
-								<Text textAlign="justify">{status.txId}</Text>
+							<Link href={""} target="_blank">
+								<Text textAlign="justify">{}</Text>
 							</Link>
 						</Stack>
 					</>
 				);
-		}
+			
+		}*/
+		return <></>;
 	};
 	return (
 		<Modal
