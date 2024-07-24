@@ -167,7 +167,11 @@ export default function Dashboard() {
 				<HStack pb={10} pl={isDesktop ? "0" : "10"}>
 					<Thermometer
 						theme="dark"
-						value={Math.round(walletdonations)}
+						value={
+							walletdonations >= 100000
+								? 100000
+								: Math.round(walletdonations)
+						}
 						max={goalADA}
 						label={`${new Intl.NumberFormat("EN-US").format(
 							Math.round(donationsLeft)
