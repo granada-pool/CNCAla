@@ -225,23 +225,50 @@ function shoot() {
 
 	const defaults = {
 		spread: 200,
-		origin: { y: 1 },
 		shapes: [plantlets, trees, party],
 		scalar,
 	};
-
+	//left
 	confetti({
 		...defaults,
+		angle: 60,
+		origin: { x: 0 },
 		particleCount: 30,
 	});
-
 	confetti({
 		...defaults,
+		angle: 50,
+		origin: { x: 0 },
 		particleCount: 5,
 		flat: true,
 	});
 	confetti({
 		...defaults,
+		angle: 40,
+		origin: { x: 0 },
+		particleCount: 15,
+		scalar: scalar / 2,
+		shapes: ["circle"],
+	});
+
+	//right
+	confetti({
+		...defaults,
+		origin: { x: 1 },
+		angle: 120,
+		particleCount: 30,
+	});
+	confetti({
+		...defaults,
+		origin: { x: 1 },
+		angle: 110,
+		particleCount: 5,
+		flat: true,
+	});
+	confetti({
+		...defaults,
+		origin: { x: 1 },
+		angle: 100,
 		particleCount: 15,
 		scalar: scalar / 2,
 		shapes: ["circle"],
